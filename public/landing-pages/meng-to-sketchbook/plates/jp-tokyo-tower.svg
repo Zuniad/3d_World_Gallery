@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 1240" width="1760" height="1240">
+  <defs>
+    <!-- Paper texture & subtle noise -->
+    <linearGradient id="paperGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F6F2EA"/>
+      <stop offset="50%" stop-color="#ECE6D8"/>
+      <stop offset="100%" stop-color="#E2D9C5"/>
+    </linearGradient>
+    <linearGradient id="washGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C45145" stop-opacity="0.32"/>
+      <stop offset="60%" stop-color="#4A6B82" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ECE7DC" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="crease" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.0"/>
+      <stop offset="48%" stop-color="#2b2721" stop-opacity="0.14"/>
+      <stop offset="50%" stop-color="#1a1714" stop-opacity="0.24"/>
+      <stop offset="52%" stop-color="#2b2721" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.0"/>
+    </linearGradient>
+    <filter id="inkRough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Open sketchbook spread background (1760 x 1240) -->
+  <rect x="0" y="0" width="1760" height="1240" fill="url(#paperGrad)"/>
+
+  <!-- Paper borders & deckle edges -->
+  <rect x="40" y="40" width="1680" height="1160" fill="none" stroke="#1F1E1C" stroke-opacity="0.12" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <rect x="52" y="52" width="1656" height="1136" fill="none" stroke="#1F1E1C" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- Center binding gutter crease -->
+  <rect x="850" y="0" width="60" height="1240" fill="url(#crease)"/>
+
+  <!-- ================= LEFT PAGE: Editorial Field Notes & Archival Metadata ================= -->
+  <g id="left-page" transform="translate(100, 110)">
+    <!-- Chapter & Plate header -->
+    <text x="0" y="40" font-family="'Instrument Serif', Georgia, serif" font-size="18" letter-spacing="4" fill="#1F1E1C" opacity="0.6">CHAPTER 02 • PLATE 013</text>
+    <text x="0" y="95" font-family="'Instrument Serif', Georgia, serif" font-size="52" font-weight="400" fill="#1F1E1C" letter-spacing="-0.5">Tokyo Tower</text>
+    <text x="0" y="132" font-family="'Newsreader', Georgia, serif" font-style="italic" font-size="24" fill="#C45145">Minato, Japan</text>
+
+    <!-- Decorative divider line -->
+    <line x1="0" y1="165" x2="620" y2="165" stroke="#1F1E1C" stroke-opacity="0.18" stroke-width="1.2"/>
+    <circle cx="310" cy="165" r="3.5" fill="#C45145"/>
+
+    <!-- Subject & Coordinates block -->
+    <rect x="0" y="195" width="620" height="85" rx="4" fill="#ECE7DC" fill-opacity="0.6" stroke="#1F1E1C" stroke-opacity="0.12"/>
+    <text x="24" y="230" font-family="'Instrument Serif', Georgia, serif" font-size="14" letter-spacing="2" fill="#1F1E1C" opacity="0.7">CLASSIFICATION</text>
+    <text x="24" y="258" font-family="'Newsreader', Georgia, serif" font-size="18" font-weight="600" fill="#1F1E1C">Communications Spire</text>
+
+    <text x="340" y="230" font-family="'Instrument Serif', Georgia, serif" font-size="14" letter-spacing="2" fill="#1F1E1C" opacity="0.7">COORDINATES</text>
+    <text x="340" y="258" font-family="'Newsreader', Georgia, serif" font-size="18" fill="#1F1E1C">35.6586° N, 139.7454° E</text>
+
+    <!-- Editorial Travel Notes (Paragraph) -->
+    <text x="0" y="340" font-family="'Instrument Serif', Georgia, serif" font-size="16" letter-spacing="3" fill="#C45145" opacity="0.9">TRAVEL JOURNAL NOTES</text>
+    <foreignObject x="0" y="360" width="620" height="260">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Newsreader', Georgia, serif; font-size: 21px; line-height: 1.62; color: #1F1E1C; text-align: justify;">
+        “Lattice-work steel finished in international orange and white, glowing against the twilight Tokyo haze as neon avenues ignite below.”
+      </div>
+    </foreignObject>
+
+    <!-- Architectural & Cultural Observation -->
+    <g transform="translate(0, 620)">
+      <line x1="0" y1="0" x2="620" y2="0" stroke="#1F1E1C" stroke-opacity="0.15" stroke-dasharray="3 3"/>
+      <text x="0" y="32" font-family="'Instrument Serif', Georgia, serif" font-size="15" letter-spacing="2.5" fill="#1F1E1C" opacity="0.75">FIELD CURATOR ANNOTATION</text>
+      <foreignObject x="0" y="48" width="620" height="150">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: 18px; line-height: 1.55; color: #1F1E1C; opacity: 0.88;">
+          Completed in 1958; inspired by the Eiffel Tower, standing 332.9 meters tall.
+        </div>
+      </foreignObject>
+    </g>
+
+    <!-- Botanical study label & Archival Seal -->
+    <g transform="translate(0, 860)">
+      <circle cx="60" cy="55" r="45" fill="none" stroke="#C45145" stroke-width="1.8" stroke-opacity="0.6"/>
+      <circle cx="60" cy="55" r="40" fill="none" stroke="#C45145" stroke-width="0.8" stroke-dasharray="4 2" stroke-opacity="0.5"/>
+      <text x="60" y="52" text-anchor="middle" font-family="'Instrument Serif', serif" font-size="11" letter-spacing="1" fill="#C45145">JP</text>
+      <text x="60" y="66" text-anchor="middle" font-family="'Newsreader', serif" font-size="10" font-weight="600" fill="#C45145">013</text>
+
+      <text x="130" y="44" font-family="'Newsreader', Georgia, serif" font-style="italic" font-size="16" fill="#1F1E1C">Botanical specimen: Prunus serrulata (Cherry Blossom)</text>
+      <text x="130" y="70" font-family="'Instrument Serif', Georgia, serif" font-size="13" letter-spacing="3" fill="#1F1E1C" opacity="0.6">京都 京 (Archival Seal)</text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT PAGE: Hand-Drawn Architectural & Watercolor Illustration ================= -->
+  <g id="right-page" transform="translate(940, 90)">
+    <!-- Decorative border framing the illustration -->
+    <rect x="0" y="0" width="720" height="1060" fill="none" stroke="#1F1E1C" stroke-opacity="0.16" stroke-width="1.2"/>
+    <rect x="10" y="10" width="700" height="1040" fill="none" stroke="#1F1E1C" stroke-opacity="0.08" stroke-width="0.8"/>
+
+    <!-- Watercolor wash sky & atmosphere behind drawing -->
+    <rect x="18" y="18" width="684" height="640" rx="2" fill="url(#washGrad)" opacity="0.85"/>
+
+    <!-- Organic watercolor spots / blooms -->
+    <ellipse cx="280" cy="220" rx="240" ry="160" fill="#C45145" fill-opacity="0.12" filter="url(#inkRough)"/>
+    <ellipse cx="480" cy="360" rx="190" ry="140" fill="#4A6B82" fill-opacity="0.15" filter="url(#inkRough)"/>
+    <ellipse cx="200" cy="520" rx="160" ry="110" fill="#C45145" fill-opacity="0.08" filter="url(#inkRough)"/>
+
+    <!-- Dynamic Architectural Drawing Elements according to landmark type -->
+    <g id="drawing" filter="url(#inkRough)" stroke="#1F1E1C" stroke-linecap="round" stroke-linejoin="round">
+      
+        <!-- Vertical Tower Structure -->
+        <rect x="300" y="160" width="120" height="660" fill="#ECE7DC" fill-opacity="0.9" stroke-width="2.5"/>
+        <!-- Tower levels -->
+        <line x1="280" y1="340" x2="440" y2="340" stroke-width="2.2"/>
+        <line x1="270" y1="520" x2="450" y2="520" stroke-width="2.2"/>
+        <line x1="260" y1="700" x2="460" y2="700" stroke-width="2.2"/>
+        <!-- Cross bracing / windows -->
+        
+          <line x1="305" y1="180" x2="415" y2="240" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="180" x2="305" y2="240" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="260" x2="415" y2="320" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="260" x2="305" y2="320" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="340" x2="415" y2="400" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="340" x2="305" y2="400" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="420" x2="415" y2="480" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="420" x2="305" y2="480" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="500" x2="415" y2="560" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="500" x2="305" y2="560" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="580" x2="415" y2="640" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="580" x2="305" y2="640" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="660" x2="415" y2="720" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="660" x2="305" y2="720" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+          <line x1="305" y1="740" x2="415" y2="800" stroke-width="1.1" stroke-opacity="0.7"/>
+          <line x1="415" y1="740" x2="305" y2="800" stroke-width="1.1" stroke-opacity="0.7"/>
+        
+        <!-- Spire Top -->
+        <polygon points="300,160 360,60 420,160" fill="#C45145" fill-opacity="0.3" stroke-width="2.2"/>
+        <line x1="360" y1="20" x2="360" y2="60" stroke-width="3"/>
+        <circle cx="360" cy="20" r="5" fill="#C45145"/>
+        <!-- Base structure -->
+        <polygon points="220,820 500,820 440,700 280,700" fill="#ECE7DC" stroke-width="2.2"/>
+      
+
+      <!-- Universal Hatching, Stone Texture, and Shading Lines -->
+      
+        <line x1="160" y1="600" x2="195" y2="625" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="230" y1="600" x2="265" y2="625" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="300" y1="600" x2="335" y2="625" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="370" y1="600" x2="405" y2="625" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="440" y1="600" x2="475" y2="625" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="510" y1="600" x2="545" y2="625" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="160" y1="655" x2="195" y2="680" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="230" y1="655" x2="265" y2="680" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="300" y1="655" x2="335" y2="680" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="370" y1="655" x2="405" y2="680" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="440" y1="655" x2="475" y2="680" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="510" y1="655" x2="545" y2="680" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="160" y1="710" x2="195" y2="735" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="230" y1="710" x2="265" y2="735" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="300" y1="710" x2="335" y2="735" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="370" y1="710" x2="405" y2="735" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="440" y1="710" x2="475" y2="735" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="510" y1="710" x2="545" y2="735" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="160" y1="765" x2="195" y2="790" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="230" y1="765" x2="265" y2="790" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="300" y1="765" x2="335" y2="790" stroke-width="0.8" opacity="0.45"/>
+      
+        <line x1="370" y1="765" x2="405" y2="790" stroke-width="0.8" opacity="0.45"/>
+      
+    </g>
+
+    <!-- Field Measure & Elevation Annotation Marks -->
+    <g transform="translate(40, 880)">
+      <line x1="0" y1="0" x2="640" y2="0" stroke="#1F1E1C" stroke-opacity="0.25"/>
+      <line x1="0" y1="-8" x2="0" y2="8" stroke="#1F1E1C" stroke-opacity="0.4"/>
+      <line x1="640" y1="-8" x2="640" y2="8" stroke="#1F1E1C" stroke-opacity="0.4"/>
+      <text x="320" y="-8" text-anchor="middle" font-family="'Newsreader', Georgia, serif" font-style="italic" font-size="14" fill="#1F1E1C" opacity="0.75">Elevation study • Scale 1:2500 • Field observations in graphite & watercolor</text>
+    </g>
+
+    <!-- Caption on Illustration -->
+    <g transform="translate(40, 940)">
+      <text x="0" y="30" font-family="'Instrument Serif', Georgia, serif" font-size="32" fill="#1F1E1C">Tokyo Tower</text>
+      <text x="0" y="60" font-family="'Newsreader', Georgia, serif" font-size="16" fill="#C45145">Plate 013 — JAPAN</text>
+      <text x="640" y="60" text-anchor="end" font-family="'Instrument Serif', Georgia, serif" font-size="14" letter-spacing="2" fill="#1F1E1C" opacity="0.55">35.6586° N, 139.7454° E</text>
+    </g>
+  </g>
+</svg>

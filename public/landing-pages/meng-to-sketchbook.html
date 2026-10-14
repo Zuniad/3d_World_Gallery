@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+function __threeuiStorageImage(...args){
+  const image=new Image(...args);
+  const property=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");
+  Object.defineProperty(image,"src",{
+    configurable:true,
+    get(){return property.get.call(this)},
+    set(value){
+      try{
+        const url=new URL(value,document.baseURI);
+        if(this.crossOrigin===null&&(url.href.startsWith("https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/")||url.origin===new URL(document.baseURI).origin)) {
+          this.crossOrigin="anonymous";
+        }
+      }catch{}
+      property.set.call(this,value);
+    }
+  });
+  return image;
+}
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas of Elsewhere — Global Travel Sketchbook</title>
+<meta name="description" content="A sketchbook of places, passages, and little discoveries — an interactive world travel journal across 12 countries and 108 illustrated plates.">
+<style>
+@font-face{
+  font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:block;
+  src:url(meng-to-sketchbook/instrument-serif.woff2) format('woff2'),
+      url(https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/embedded/60c06664b5a95c7de6cc3e00d1f9034d78bd1e40b564016b241674449a067d4d.woff2) format('woff2');
+}
+@font-face{
+  font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:block;
+  src:url(meng-to-sketchbook/instrument-serif-italic.woff2) format('woff2'),
+      url(https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/embedded/6ee678c33f388dd7ba59700ebea635deb98821baafd817b09891f7927177f702.woff2) format('woff2');
+}
+@font-face{
+  font-family:'Newsreader';font-style:normal;font-weight:200 600;font-display:swap;
+  src:url(meng-to-sketchbook/newsreader.woff2) format('woff2'),
+      url(https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/dcec2e68141a33903e3b6cc1/newsreader.woff2) format('woff2');
+}
+
+:root{
+  --paper:#ece7dc;
+  --aged-parchment:#e5d6bd;
+  --ink:#2b2721;
+  --ink-soft:rgba(43,39,33,.58);
+  --ink-faint:rgba(43,39,33,.36);
+  --hairline:rgba(43,39,33,.14);
+  --earth:#9a6a3e;
+  --terracotta:#b8755c;
+  --botanical:#69775a;
+  --ocean-blue:#7f9fa6;
+  --display:'Instrument Serif',"New York",Georgia,'Times New Roman',serif;
+  --font:'Newsreader',"New York",Georgia,'Times New Roman',serif;
+  --track-caps:.24em;
+  --track-nav:.06em;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font);font-weight:400;background:var(--paper);color:var(--ink);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:rgba(184,117,92,.25);color:var(--ink)}
+
+.wash{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:url(meng-to-sketchbook/bg-wash.jpg) center top / cover no-repeat,
+             url(https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/339abd2c649a11f725af9114/bg-wash.jpg) center top / cover no-repeat;
+  opacity:.85;
+}
+.wash:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(236,231,220,.25) 0%,rgba(236,231,220,.72) 58%,var(--paper) 88%);
+}
+
+.page{position:relative;width:100%;min-height:100vh;display:flex;flex-direction:column}
+
+/* Top Header */
+.top{
+  padding:28px 48px 16px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--hairline);position:relative;z-index:10;
+  backdrop-filter:blur(6px);background:rgba(236,231,220,0.65);
+}
+.brand{display:flex;flex-direction:column;gap:3px}
+.brand-title{font-family:var(--display);font-size:28px;letter-spacing:1px;font-weight:400;color:var(--ink)}
+.brand-sub{font-size:14px;font-style:italic;color:var(--ink-soft);letter-spacing:0.02em}
+
+.top nav{display:flex;align-items:center;gap:28px;font-size:14px;letter-spacing:var(--track-caps);text-transform:uppercase}
+.top nav a{color:var(--ink-soft);transition:color .2s ease}
+.top nav a:hover{color:var(--ink)}
+
+/* Chapter Bar */
+.chapter-bar-wrap{
+  padding:12px 48px;border-bottom:1px solid var(--hairline);background:rgba(236,231,220,0.45);
+  display:flex;align-items:center;gap:12px;overflow-x:auto;scrollbar-width:none;
+}
+.chapter-bar-wrap::-webkit-scrollbar{display:none}
+.chapter-bar-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
+.ch-btn{
+  background:transparent;border:1px solid var(--hairline);padding:5px 12px;border-radius:20px;
+  font-size:12px;letter-spacing:1px;cursor:pointer;color:var(--ink-soft);transition:all .18s ease;white-space:nowrap;
+}
+.ch-btn:hover{border-color:var(--ink);color:var(--ink)}
+.ch-btn.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* Hero Section with 3D Sketchbook */
+.hero{
+  position:relative;padding:32px 24px 64px;display:flex;flex-direction:column;align-items:center;
+  min-height:86vh;justify-content:center;
+}
+.botany{position:absolute;pointer-events:none;z-index:1;max-width:320px;opacity:.9}
+.botany.l{top:20px;left:0}
+.botany.r{top:20px;right:0}
+
+.chapter-badge-wrap{margin-bottom:18px;text-align:center;z-index:2}
+.ch-banner{
+  display:inline-block;padding:4px 16px;border-radius:14px;background:rgba(43,39,33,0.06);
+  border:1px solid var(--hairline);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-soft);
+}
+.ch-desc-note{font-size:15px;font-style:italic;color:var(--ink-soft);margin-top:6px;max-width:680px}
+
+/* 3D Sketchbook Stage */
+.sb-wrap{position:relative;width:100%;max-width:1120px;margin:0 auto;z-index:2}
+.sb-stage{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  perspective:1800px;touch-action:none;user-select:none;
+}
+.sb-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:40;
+  background:rgba(243,235,221,0.92);border:1px solid rgba(43,39,33,0.25);border-radius:50%;
+  cursor:pointer;color:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,0.2);
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease;
+}
+.sb-arrow:hover{
+  opacity:1;background:#ffffff;border-color:var(--terracotta);color:var(--terracotta);
+  transform:translateY(-50%) scale(1.12);box-shadow:0 6px 20px rgba(0,0,0,0.25);
+}
+.sb-arrow.left{left:-20px}
+.sb-arrow.right{right:-20px}
+@media (max-width: 1024px) {
+  .sb-arrow.left{left:12px}
+  .sb-arrow.right{right:12px}
+}
+
+.sb-3d{
+  position:relative;width:100%;aspect-ratio:1760/1240;max-height:760px;
+  transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--zoom,1));
+  transition:transform .08s ease-out;
+}
+.sb-tilt{position:absolute;inset:0;transform-style:preserve-3d}
+
+/* Cast shadows */
+.sb-cast{position:absolute;inset:4% 3% -3% 3%;pointer-events:none;border-radius:12px}
+.sb-cast.ambient{box-shadow:0 30px 60px rgba(43,39,33,.22), 0 10px 24px rgba(43,39,33,.12)}
+.sb-cast.contact{box-shadow:0 6px 14px rgba(43,39,33,.18)}
+.sb-cast.hair{box-shadow:0 1px 3px rgba(43,39,33,.25)}
+
+/* Book and Paper */
+.sb-book{position:absolute;inset:0;background:var(--paper);border-radius:4px;overflow:hidden}
+.sb-full{position:absolute;inset:0;overflow:hidden}
+.sb-full img{width:100%;height:100%;object-fit:contain;display:block}
+
+.sb-half{position:absolute;top:0;bottom:0;width:50%;overflow:hidden}
+.sb-half.left{left:0}
+.sb-half.right{right:0}
+.sb-half-img{position:absolute;top:0;height:100%;width:200%;max-width:none}
+.sb-half-img.left{left:0}
+.sb-half-img.right{right:0}
+
+.gutter-shade{position:absolute;top:0;bottom:0;width:60px;pointer-events:none}
+.gutter-shade.left{right:0;background:linear-gradient(90deg,transparent,rgba(43,39,33,.14))}
+.gutter-shade.right{left:0;background:linear-gradient(-90deg,transparent,rgba(43,39,33,.14))}
+
+.sb-zone{position:absolute;top:0;bottom:0;width:50%;background:transparent;border:0;cursor:pointer;z-index:15}
+.sb-zone.sb-prev{left:0}
+.sb-zone.sb-next{right:0}
+
+/* Curled Leaf & 18 Strips Chain */
+.curl{
+  position:absolute;top:0;bottom:0;width:calc(var(--bw) * var(--span));
+  transform-style:preserve-3d;pointer-events:none;z-index:10;
+}
+.curl.next{right:calc(var(--bw) * 0.5);transform-origin:right center}
+.curl.prev{left:calc(var(--bw) * 0.5);transform-origin:left center}
+.strip{
+  position:absolute;top:0;bottom:0;left:0;width:calc(100% / var(--n));
+  transform-style:preserve-3d;transform-origin:left center;
+  transform:rotateY(var(--td));
+}
+.strip>.strip{left:100%}
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;
+  background-size:var(--bw) 100%;background-repeat:no-repeat;
+}
+.face.back{transform:rotateY(180deg)}
+.face .sh{position:absolute;inset:0;background:#000;opacity:var(--a1,0);pointer-events:none}
+.face .gl{position:absolute;inset:0;background:#fff;opacity:calc(var(--lit,0) * 0.12);pointer-events:none}
+
+/* Magnifying Loupe */
+.loupe{
+  position:absolute;width:var(--lr,210px);height:var(--lr,210px);top:0;left:0;
+  border-radius:50%;pointer-events:auto;cursor:grab;z-index:25;
+  display:none;touch-action:none;
+}
+.loupe.on{display:block}
+.loupe.held{cursor:grabbing}
+.loupe .ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:6px solid #4a3e31;box-shadow:0 12px 28px rgba(0,0,0,.38), inset 0 0 10px rgba(0,0,0,.45);
+}
+.loupe .grip{
+  position:absolute;width:14px;height:70px;background:linear-gradient(90deg,#2b231a,#534536,#2b231a);
+  bottom:-64px;right:-18px;transform:rotate(-45deg);border-radius:4px;box-shadow:0 8px 16px rgba(0,0,0,.3);
+}
+.zoomwrap{
+  position:absolute;inset:0;pointer-events:none;z-index:24;overflow:hidden;
+  mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;
+}
+.zoominner{position:absolute;inset:0;width:100%;height:100%;transform-origin:0 0}
+
+/* Tools bar */
+.sb-captions{text-align:center;margin-top:16px;min-height:38px;position:relative}
+.sb-caption{
+  margin:0;font-family:var(--display);font-size:30px;letter-spacing:.01em;color:var(--ink);
+  transition:opacity .2s ease;
+}
+.sb-caption.sub{font-size:16px;font-family:var(--font);font-style:italic;color:var(--terracotta);margin-top:4px}
+.sb-caption.live{position:absolute;left:0;right:0;top:0}
+
+.sb-tools{
+  display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;
+}
+.tool{
+  background:rgba(236,231,220,.8);border:1px solid var(--hairline);border-radius:24px;
+  padding:6px 14px;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;
+  color:var(--ink);transition:all .18s ease;box-shadow:0 2px 6px rgba(43,39,33,.08);
+}
+.tool:hover{border-color:var(--ink);background:var(--paper)}
+.tool:disabled{opacity:.4;cursor:default}
+.zoom-read{font-size:13px;font-family:var(--display);letter-spacing:1px;min-width:44px;text-align:center}
+.tool-sep{width:1px;height:18px;background:var(--hairline);margin:0 4px}
+.sb-hint{text-align:center;font-size:13px;font-style:italic;color:var(--ink-soft);margin-top:10px}
+.sb-hint.gone{opacity:0;pointer-events:none}
+
+/* Section divider rule */
+.rule{width:100%;max-width:1120px;height:1px;background:var(--hairline);margin:32px auto}
+.rule.short{max-width:540px}
+
+/* Editorial Plates Index */
+.plates-section{max-width:1120px;margin:0 auto;padding:0 24px 64px}
+.index-header{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px}
+.index-title{font-family:var(--display);font-size:36px;font-weight:400;margin:0}
+.search-box{display:flex;align-items:center;gap:8px;background:rgba(236,231,220,.8);border:1px solid var(--hairline);border-radius:20px;padding:6px 16px}
+.search-box input{background:transparent;border:0;outline:none;font-family:var(--font);font-size:15px;color:var(--ink);width:220px}
+.search-box input::placeholder{color:var(--ink-faint);font-style:italic}
+
+.plate-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:14px;list-style:none;padding:0;margin:0}
+.plate-item{
+  background:rgba(247,242,232,.7);border:1px solid var(--hairline);border-radius:8px;padding:12px 16px;
+  cursor:pointer;transition:all .18s ease;display:flex;flex-direction:column;gap:4px;text-align:left;
+}
+.plate-item:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:0 6px 14px rgba(43,39,33,.08)}
+.plate-item.active{border-color:var(--terracotta);background:rgba(236,231,220,.95);box-shadow:0 0 0 1.5px var(--terracotta)}
+.plate-meta{display:flex;justify-content:space-between;font-size:12px;letter-spacing:1px;color:var(--terracotta)}
+.plate-title{font-family:var(--display);font-size:19px;color:var(--ink);margin:0}
+.plate-place{font-size:13px;font-style:italic;color:var(--ink-soft);margin:0}
+
+/* Footer */
+.foot{text-align:center;padding:48px 24px;border-top:1px solid var(--hairline);font-size:14px;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<div class="wash" aria-hidden="true"></div>
+<main class="page">
+  <header class="top">
+    <div class="brand">
+      <span class="brand-title">ATLAS OF ELSEWHERE</span>
+      <span class="brand-sub">A sketchbook of places, passages, and little discoveries</span>
+    </div>
+    <nav>
+      <a href="#sketchbook">Sketchbook</a>
+      <a href="#index">Plates Index</a>
+      <a href="#about">Curator’s Note</a>
+    </nav>
+  </header>
+
+  <!-- Country Chapters Navigation Bar -->
+  <div class="chapter-bar-wrap" role="navigation" aria-label="Country Chapters">
+    <span class="chapter-bar-label">Chapters:</span>
+    <button class="ch-btn active" data-ch="0">Cover</button>
+    <button class="ch-btn" data-ch="1" title="Equatorial Garden City & Maritime Crossroads">SG • Singapore</button><button class="ch-btn" data-ch="2" title="Ancient Shrines, Cedar Groves & Alpine Silence">JP • Japan</button><button class="ch-btn" data-ch="3" title="Sun-Drenched Stone, Marble Domes & Venetian Lagoons">IT • Italy</button><button class="ch-btn" data-ch="4" title="Limestone Mansards, Tidal Abbeys & Lavender Fields">FR • France</button><button class="ch-btn" data-ch="5" title="Carved Sandstone, Sacred River Steps & Spice Coasts">IN • India</button><button class="ch-btn" data-ch="6" title="Canyon Strata, Granite Monoliths & Suspension Spans">US • United States</button><button class="ch-btn" data-ch="7" title="Granite Horns, Alpine Meadows & Medieval Timber">CH • Switzerland</button><button class="ch-btn" data-ch="8" title="Desert Monoliths, Papyrus Columns & Eternal Waters">EG • Egypt</button><button class="ch-btn" data-ch="9" title="Weathered Ashlar, Moorland Ridges & Gothic Spires">GB • United Kingdom</button><button class="ch-btn" data-ch="10" title="Glacial Fjords, Alpine Passes & Native Ferns">NZ • New Zealand</button><button class="ch-btn" data-ch="11" title="Byzantine Domes, Tufa Spires & Bosphorus Straits">TR • Turkey</button><button class="ch-btn" data-ch="12" title="Volcanic Calderas, Stone Stupas & Equatorial Reefs">ID • Indonesia</button>
+  </div>
+
+  <section id="sketchbook" class="hero">
+    <img crossorigin="anonymous" class="botany l" src="meng-to-sketchbook/botany-left.png" alt="" aria-hidden="true" onerror="this.src='https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/339abd2c649a11f725af9114/botany-left.png'">
+    <img crossorigin="anonymous" class="botany r" src="meng-to-sketchbook/botany-right.png" alt="" aria-hidden="true" onerror="this.src='https://ublctyddhtbgaersvxxb.supabase.co/storage/v1/object/public/threeui-media/scene-images/339abd2c649a11f725af9114/botany-right.png'">
+
+    <!-- Dynamic Chapter Banner -->
+    <div class="chapter-badge-wrap">
+      <span class="ch-banner" id="chBanner">FOLIO INTRODUCTION</span>
+      <div class="ch-desc-note" id="chTagline">12 Geographic Chapters · 108 Illustrated Plates Collected Worldwide</div>
+    </div>
+
+    <div class="sb-wrap" id="sbWrap">
+      <div class="sb-stage" id="sbStage">
+        <button class="sb-arrow left" id="sbLeft" aria-label="Previous plate">
+          <svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true">
+            <polyline points="11,3 3,22 11,41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="sb-3d" id="sb3d">
+          <div class="sb-tilt" id="sbTilt">
+            <div class="sb-cast ambient" aria-hidden="true"></div>
+            <div class="sb-cast contact" aria-hidden="true"></div>
+            <div class="sb-cast hair" aria-hidden="true"></div>
+            <div class="sb-book" id="sbBook"></div>
+          </div>
+          <div class="zoomwrap" id="zoomWrap" aria-hidden="true"><div class="zoominner" id="zoomInner"></div></div>
+          <div class="loupe" id="loupe" aria-label="Magnifier glass" title="Drag to inspect drawings"><span class="grip"></span><span class="ring"><span class="lens" id="loupeLens"><span class="mag" id="loupeMag"></span></span></span></div>
+        </div>
+
+        <button class="sb-arrow right" id="sbRight" aria-label="Next plate">
+          <svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true">
+            <polyline points="3,3 11,22 3,41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sb-captions" id="sbCaptions"></div>
+
+      <div class="sb-tools" role="group" aria-label="view controls">
+        <button class="tool" id="zOut" aria-label="zoom out">
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8"/></svg>
+          Zoom Out
+        </button>
+        <span class="zoom-read" id="zRead">100%</span>
+        <button class="tool" id="zIn" aria-label="zoom in">
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8M8.6 6.2v4.8"/></svg>
+          Zoom In
+        </button>
+        <span class="tool-sep" aria-hidden="true"></span>
+        <button class="tool" id="resetZoomBtn" aria-label="reset zoom">Reset (100%)</button>
+        <span class="tool-sep" aria-hidden="true"></span>
+        <button class="tool" id="loupeBtn" aria-label="toggle magnifier" aria-pressed="true">
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8.8" cy="8.8" r="5.8"/><path d="M13 13l4.4 4.4"/></svg>
+          Magnifier Loupe
+        </button>
+      </div>
+      <p class="sb-hint" id="sbHint">Drag paper edge to curl · Drag magnifying glass across illustrations · Double-click to reset zoom</p>
+    </div>
+  </section>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <!-- Editorial Plates Index -->
+  <section id="index" class="plates-section">
+    <div class="index-header">
+      <div>
+        <h2 class="index-title">Editorial Plates Index</h2>
+        <p style="margin:4px 0 0;font-size:15px;color:var(--ink-soft);font-style:italic">108 architectural studies, landscape drawings, and field notes across 12 countries</p>
+      </div>
+      <div class="search-box">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 17.4 17.4"/></svg>
+        <input type="text" id="searchInput" placeholder="Search landmark, country, plate...">
+      </div>
+    </div>
+    <ul class="plate-grid" id="plateGrid"></ul>
+  </section>
+
+  <footer class="foot">
+    <p><strong>ATLAS OF ELSEWHERE</strong> — An interactive world travel journal.<br>Rendered in ThreeUI physical paper shaders & vector plate reproductions.</p>
+  </footer>
+</main>
+
+<script>
+/* =====================================================================
+   ATLAS OF ELSEWHERE — Full 108-Plate Global Travel Sketchbook Engine
+   Preserves original 18-strip curl arc, spring physics, and loupe.
+   ===================================================================== */
+const Q = new URLSearchParams(location.search);
+const DIR = 'meng-to-sketchbook/';
+
+const CHAPTER_INFO = [{"num":1,"id":"singapore","country":"Singapore","cc":"SG","start":1,"end":9,"tagline":"Equatorial Garden City & Maritime Crossroads","intro":"Where the South China Sea gathers colonial trading quays, lush rain-trees, and glass towers crowned by sky gardens."},{"num":2,"id":"japan","country":"Japan","cc":"JP","start":10,"end":18,"tagline":"Ancient Shrines, Cedar Groves & Alpine Silence","intro":"Centuries of timber carpentry, moss-covered temple paths, vermilion torii, and snow-capped volcanic ridges."},{"num":3,"id":"italy","country":"Italy","cc":"IT","start":19,"end":27,"tagline":"Sun-Drenched Stone, Marble Domes & Venetian Lagoons","intro":"Terracotta pantiles warmed by two thousand summers, arched loggias, and cypress shadows falling across quiet piazzas."},{"num":4,"id":"france","country":"France","cc":"FR","start":28,"end":36,"tagline":"Limestone Mansards, Tidal Abbeys & Lavender Fields","intro":"Wrought-iron balconies catching morning Seine light, Gothic flying buttresses, and sea winds whipping past granite promontories."},{"num":5,"id":"india","country":"India","cc":"IN","start":37,"end":45,"tagline":"Carved Sandstone, Sacred River Steps & Spice Coasts","intro":"Monolithic granite boulders resting on ancient riverbeds, marble domes floating at dawn, and fragrant temple courtyards."},{"num":6,"id":"united-states","country":"United States","cc":"US","start":46,"end":54,"tagline":"Canyon Strata, Granite Monoliths & Suspension Spans","intro":"Two billion years of exposed red earth, towering Pacific sequoias, and cathedrals of riveted suspension steel."},{"num":7,"id":"switzerland","country":"Switzerland","cc":"CH","start":55,"end":63,"tagline":"Granite Horns, Alpine Meadows & Medieval Timber","intro":"Glacial cirques carved above pine-scented valleys, timber-covered bridges spanning clear alpine torrents, and sheer limestone walls."},{"num":8,"id":"egypt","country":"Egypt","cc":"EG","start":64,"end":72,"tagline":"Desert Monoliths, Papyrus Columns & Eternal Waters","intro":"Golden limestone rising from desert sands, papyrus columns reflected in the Nile, and sunken rock-cut tombs enduring through millennia."},{"num":9,"id":"united-kingdom","country":"United Kingdom","cc":"GB","start":73,"end":81,"tagline":"Weathered Ashlar, Moorland Ridges & Gothic Spires","intro":"Ancient standing stones beneath scudding northern clouds, iron bridges echoing over the Thames, and castle crags towering above coastal firths."},{"num":10,"id":"new-zealand","country":"New Zealand","cc":"NZ","start":82,"end":90,"tagline":"Glacial Fjords, Alpine Passes & Native Ferns","intro":"Sheer granite cliffs plummeting into dark southern waters, turquoise glacial lakes reflecting snow fields, and rolling emerald valleys."},{"num":11,"id":"turkey","country":"Turkey","cc":"TR","start":91,"end":99,"tagline":"Byzantine Domes, Tufa Spires & Bosphorus Straits","intro":"Pencil-thin minarets punctuating the Golden Horn skyline, fairy chimneys carved by volcanic ash, and marble porticos echoing ancient assemblies."},{"num":12,"id":"indonesia","country":"Indonesia","cc":"ID","start":100,"end":108,"tagline":"Volcanic Calderas, Stone Stupas & Equatorial Reefs","intro":"Volcanic andesite stupas emerging from morning jungle mist, wave-beaten sea shrines perched on craggy promontories, and stepped rice terraces."}];
+
+const PAGES = [{"file":"https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1760&q=80","title":"Atlas of Elsewhere","place":"Frontispiece & Cover","chapter":0,"chapterTitle":"Opening Cover","country":"World","countryCode":"ATLAS","plateNumber":0,"coordinates":"Global Meridians","classification":"Opening Folio","description":"A sketchbook of places, passages, and little discoveries collected during journeys around the world.","notes":"Opening edition covering twelve chapters across Europe, Asia, Africa, the Americas, and Oceania."},{"file":"marina-bay-sands.png","title":"Marina Bay Sands","place":"Bayfront","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":1,"coordinates":"1.2838° N, 103.8591° E","classification":"Modern Waterfront","description":"Three sculptural towers rise above the waterfront, joined by a sky park that reshapes the city’s silhouette. At dusk, glass, water, and warm light become one continuous study of reflections.","notes":"Engineered by Moshe Safdie; cantilevered SkyPark spans 340 meters across the triad."},{"file":"merlion.png","title":"The Merlion","place":"Merlion Park","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":2,"coordinates":"1.2868° N, 103.8545° E","classification":"Civic Monument","description":"The mythical guardian of the Lion City spouts cool water towards the open harbour. Salt breeze and morning spray mist the stone promenade.","notes":"Designed by Kwan Sai Kheong and sculpted by Lim Nang Seng in 1972; height 8.6 meters."},{"file":"gardens-by-the-bay.png","title":"Gardens by the Bay","place":"Supertree Grove","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":3,"coordinates":"1.2816° N, 103.8636° E","classification":"Botanical Architecture","description":"Enormous vertical gardens clad in bromeliads, ferns, and orchids reach toward the tropical canopy, laced by aerial skyways.","notes":"Eighteen Supertrees ranging from 25 to 50 meters, harvesting rainwater and venting conservatory air."},{"file":"singapore-river.png","title":"Singapore River","place":"Boat Quay","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":4,"coordinates":"1.2882° N, 103.8493° E","classification":"Historic Maritime","description":"Old bumboats glide through the historic belly of the city, flanked by preserved red-tile godowns that now hum with riverside chatter.","notes":"The lifeline of early Singapore trade; restored godowns stand before modern glass high-rises."},{"file":"buddha-tooth.png","title":"Buddha Tooth Relic Temple","place":"Chinatown","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":5,"coordinates":"1.2814° N, 103.8443° E","classification":"Sacred Architecture","description":"Richly lacquered Tang-style timber bracket sets and crimson balconies rise majestically above South Bridge Road, scenting the air with sandalwood incense.","notes":"Completed in 2007; designed after Tang dynasty architectural treatises and mandala geometry."},{"file":"lau-pa-sat.png","title":"Lau Pa Sat","place":"Raffles Quay","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":6,"coordinates":"1.2807° N, 103.8504° E","classification":"Victorian Cast-Iron","description":"Filigreed Victorian cast-iron arches and clock tower stand resolute amidst banking skyscrapers, filling the evening air with charcoal smoke and satay spices.","notes":"Pre-fabricated Scottish cast iron designed by James MacRitchie in 1894; octagonal plan."},{"file":"joo-chiat.png","title":"Joo Chiat Shophouses","place":"Katong","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":7,"coordinates":"1.3106° N, 103.9015° E","classification":"Peranakan Vernacular","description":"A joyful parade of pastel stucco, ceramic tile friezes, and timber louvered shutters celebrating the intricate craft of Straits Chinese craftsmen.","notes":"Built in the late 1920s; characteristic eclectic blend of Chinese, Malay, and European motifs."},{"file":"botanic-gardens.png","title":"Botanic Gardens","place":"Tanglin","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":8,"coordinates":"1.3138° N, 103.8159° E","classification":"UNESCO Botanical Heritage","description":"Verdant colonial bandstands, giant fan palms, and heritage rain-trees whose winding boughs support curtains of epiphytic moss and orchids.","notes":"Founded in 1859 by an agri-horticultural society; UNESCO World Heritage Site."},{"file":"marina-bay-skyline.png","title":"Marina Bay Skyline","place":"The Bay","chapter":1,"chapterTitle":"Chapter 01 — SINGAPORE","country":"Singapore","countryCode":"SG","plateNumber":9,"coordinates":"1.2850° N, 103.8560° E","classification":"Urban Panorama","description":"A panoramic ink sweep encompassing the old colonial customs house, financial spires, the lotus-inspired ArtScience Museum, and the shimmering bay.","notes":"A fifty-year transformation from shallow mudflat to world-famous architectural lagoon."},{"file":"https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1760&q=80","title":"Mount Fuji","place":"Lake Kawaguchi","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":10,"coordinates":"35.3606° N, 138.7274° E","classification":"Stratovolcano & Sacred Peak","description":"A symmetrical volcanic cone capped with perennial white snow, mirrored in still lake waters through early morning cedar mist.","notes":"Revered as a sacred kami since the Jomon period; rising 3,776 meters above the Suruga Bay."},{"file":"https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=1760&q=80","title":"Fushimi Inari Shrine","place":"Inari Mountain","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":11,"coordinates":"34.9671° N, 135.7727° E","classification":"Shinto Shrine Complex","description":"Thousands of vermilion torii gates snake up the forested slopes of Mount Inari, casting deep red shadows across stone fox statues.","notes":"Founded in 711 AD; dedicated to the Shinto deity of rice, agriculture, and prosperity."},{"file":"https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1760&q=80","title":"Kiyomizu-dera","place":"Higashiyama","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":12,"coordinates":"34.9949° N, 135.7850° E","classification":"Historic Timber Temple","description":"A massive timber veranda jutting out over the forested gorge without a single nail, floating atop hundreds of keyaki wood pillars.","notes":"Originally founded in 778 AD; present main hall reconstructed in 1633 under Tokugawa Iemitsu."},{"file":"https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1760&q=80","title":"Tokyo Tower","place":"Minato","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":13,"coordinates":"35.6586° N, 139.7454° E","classification":"Communications Spire","description":"Lattice-work steel finished in international orange and white, glowing against the twilight Tokyo haze as neon avenues ignite below.","notes":"Completed in 1958; inspired by the Eiffel Tower, standing 332.9 meters tall."},{"file":"https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1760&q=80","title":"Himeji Castle","place":"Himeji","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":14,"coordinates":"34.8394° N, 134.6939° E","classification":"Feudal Castle Keep","description":"Known as the White Heron for its brilliant plaster walls and curving gables, crowned by curved eaves that resemble wings taking flight.","notes":"Extensive surviving 17th-century castle complex of 83 buildings; UNESCO World Heritage Site."},{"file":"https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=1760&q=80","title":"Itsukushima Shrine","place":"Miyajima Island","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":15,"coordinates":"34.2958° N, 132.3196° E","classification":"Floating Shinto Shrine","description":"At high tide, the vermilion grand torii seems to float directly on the Seto Inland Sea, framed by sacred camphor trees and granite peaks.","notes":"Current 16-meter-tall gate built in 1875 from rot-resistant camphor wood; founded in 593 AD."},{"file":"https://images.unsplash.com/photo-1545569341-9eb8b30979d9?auto=format&fit=crop&w=1760&q=80","title":"Arashiyama Bamboo Grove","place":"Sagano","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":16,"coordinates":"35.0167° N, 135.6713° E","classification":"Botanical Forest Path","description":"Towering green bamboo stalks filtering celestial daylight into emerald shafts, rustling with every breath of mountain wind.","notes":"Designated one of the \"100 Soundscapes of Japan\" by the Ministry of the Environment."},{"file":"https://images.unsplash.com/photo-1590559899731-a382839e5549?auto=format&fit=crop&w=1760&q=80","title":"Osaka Castle","place":"Chuo-ku","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":17,"coordinates":"34.6873° N, 135.5262° E","classification":"Fortified Main Keep","description":"Gold-leaf shachihoko sea dragons gleam atop turquoise eaves, perched over massive dry-stone moat ramparts constructed of giant granite blocks.","notes":"Originally constructed by Toyotomi Hideyoshi in 1583; fortress ramparts survive intact."},{"file":"https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1760&q=80","title":"Shibuya Crossing","place":"Shibuya","chapter":2,"chapterTitle":"Chapter 02 — JAPAN","country":"Japan","countryCode":"JP","plateNumber":18,"coordinates":"35.6595° N, 139.7004° E","classification":"Urban Intersection","description":"A synchronized human tide flowing simultaneously across diagonal zebra stripes, surrounded by towering digital screens and railway viaducts.","notes":"The busiest pedestrian intersection in the world, with up to 3,000 pedestrians per green light."},{"file":"https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1760&q=80","title":"Colosseum","place":"Rome","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":19,"coordinates":"41.8902° N, 12.4922° E","classification":"Roman Amphitheatre","description":"Weathered travertine arches stack four storeys high, scarred by centuries of sun, earthquakes, and lime gatherers under a warm Roman sky.","notes":"Inaugurated in 80 AD under Emperor Titus; constructed of travertine stone, tuff, and brick-faced concrete."},{"file":"https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1760&q=80","title":"Grand Canal","place":"Venice","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":20,"coordinates":"45.4371° N, 12.3326° E","classification":"Lagoon Waterway","description":"Gothic palace facades with pointed arches and marble balconies line the shimmering green waterway, punctuated by striped mooring poles.","notes":"Ancient river branch winding 3.8 kilometers through Venice in a graceful reverse-S curve."},{"file":"https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=1760&q=80","title":"Florence Cathedral","place":"Piazza del Duomo","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":21,"coordinates":"43.7731° N, 11.2560° E","classification":"Renaissance Dome & Basilica","description":"Brunelleschi’s revolutionary terracotta herringbone dome crowns a polychrome marble facade of white Carrara, green Prato, and pink Maremma.","notes":"Engineered by Filippo Brunelleschi without centering timber; consecrated in 1436."},{"file":"https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=1760&q=80","title":"Leaning Tower of Pisa","place":"Piazza dei Miracoli","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":22,"coordinates":"43.7230° N, 10.3966° E","classification":"Romanesque Campanile","description":"Eight tiers of open blind arcades crafted in pristine white marble, defying gravity across the lush green Campo dei Miracoli.","notes":"Began tilting during construction in 1178 due to soft alluvial subsoil; stabilized at 3.97 degrees."},{"file":"https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1760&q=80","title":"Cinque Terre","place":"Manarola","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":23,"coordinates":"44.1068° N, 9.7288° E","classification":"Coastal Cliff Village","description":"Pastel-washed houses cling precipitously to black jagged cliffs above turquoise Mediterranean surf, terraced with dry-stone vineyard walls.","notes":"Five medieval villages founded on the steep Ligurian coastline; UNESCO World Heritage Site."},{"file":"https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1760&q=80","title":"Trevi Fountain","place":"Rome","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":24,"coordinates":"41.9009° N, 12.4833° E","classification":"Baroque Fountain Monument","description":"Oceanus surges forward on a shell chariot guided by sea horses, water cascading over carved travertine boulders into a sapphire pool.","notes":"Designed by Nicola Salvi; terminus of the ancient Acqua Vergine aqueduct built in 19 BC."},{"file":"https://images.unsplash.com/photo-1555992828-ca4dbe41d294?auto=format&fit=crop&w=1760&q=80","title":"Pantheon","place":"Rome","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":25,"coordinates":"41.8986° N, 12.4769° E","classification":"Ancient Roman Rotunda","description":"An immense unreinforced concrete dome pierced by a 9-meter open oculus, through which a single shaft of celestial light sweeps across marble pavements.","notes":"Commissioned by Marcus Agrippa and rebuilt by Hadrian c. 126 AD; still the world’s largest unreinforced concrete dome."},{"file":"https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1760&q=80","title":"Amalfi Coast","place":"Positano","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":26,"coordinates":"40.6281° N, 14.4850° E","classification":"Vertical Coastal Landscape","description":"Lemon groves and whitewashed villas cascade down limestone ravines toward pebble beaches, scented with sea salt and blossoming jasmine.","notes":"A dramatic coastal stretch known since Roman times for maritime power and cliff terracing."},{"file":"https://images.unsplash.com/photo-1514890547357-a9ee288728e0?auto=format&fit=crop&w=1760&q=80","title":"Rialto Bridge","place":"Venice","chapter":3,"chapterTitle":"Chapter 03 — ITALY","country":"Italy","countryCode":"IT","plateNumber":27,"coordinates":"45.4380° N, 12.3358° E","classification":"Istrian Stone Arch Bridge","description":"A bold single stone arch spanning the Grand Canal, lined with twin rows of shops under a sheltering gabled arcade of gleaming Istrian stone.","notes":"Designed by Antonio da Ponte; completed in 1591, resting on 12,000 submerged wooden pilings."},{"file":"https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=1760&q=80","title":"Eiffel Tower","place":"Paris","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":28,"coordinates":"48.8584° N, 2.2945° E","classification":"Puddle-Iron Lattice Monument","description":"Four parabolic wrought-iron arches taper gracefully toward the Parisian sky, capturing the changing silver light of the Seine basin.","notes":"Engineered by Gustave Eiffel for the 1889 Exposition Universelle; height 330 meters."},{"file":"https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1760&q=80","title":"Louvre Museum","place":"Cour Napoléon","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":29,"coordinates":"48.8606° N, 2.3376° E","classification":"Palatial Glass & Stone Complex","description":"I.M. Pei’s geometric glass pyramid reflects classical Renaissance mansards and stone pilasters in still fountain basins.","notes":"Former medieval fortress and royal palace transformed into the world’s most visited museum."},{"file":"https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1760&q=80","title":"Mont Saint-Michel","place":"Gulf of Saint-Malo","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":30,"coordinates":"48.6360° N, 1.5115° E","classification":"Tidal Benedictine Abbey","description":"A granite abbey spire crowns an island rock encircled by legendary fast-flowing Atlantic tides and vast sandy mudflats.","notes":"First sanctuary consecrated in 708 AD; celebrated for dramatic tides rising up to 14 meters."},{"file":"https://images.unsplash.com/photo-1478860409698-8707f313ee8b?auto=format&fit=crop&w=1760&q=80","title":"Notre-Dame Cathedral","place":"Île de la Cité","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":31,"coordinates":"48.8530° N, 2.3499° E","classification":"High Gothic Cathedral","description":"Soaring flying buttresses and stone chimeras watch over the river island, illuminated through magnificent stained-glass rose windows.","notes":"Begun in 1163 under Bishop Maurice de Sully; exemplar of French Gothic rib vaulting."},{"file":"https://images.unsplash.com/photo-1551634979-2b11f8c946fe?auto=format&fit=crop&w=1760&q=80","title":"Palace of Versailles","place":"Versailles","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":32,"coordinates":"48.8049° N, 2.1204° E","classification":"Baroque Royal Estate","description":"Gilded gates and classical ashlar facades open toward the Grand Canal through formal parterres designed with geometric precision.","notes":"Expanded under Louis XIV from 1661 by Louis Le Vau, Jules Hardouin-Mansart, and André Le Nôtre."},{"file":"https://images.unsplash.com/photo-1509439581779-6298f75bf6e5?auto=format&fit=crop&w=1760&q=80","title":"Arc de Triomphe","place":"Place Charles de Gaulle","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":33,"coordinates":"48.8738° N, 2.2950° E","classification":"Neoclassical Triumphal Arch","description":"Colossal heroic reliefs carved by François Rude flank the monumental vault anchoring twelve radiating tree-lined avenues.","notes":"Commissioned by Napoleon in 1806 after victory at Austerlitz; height 50 meters."},{"file":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1760&q=80","title":"French Riviera","place":"Nice & Promenade des Anglais","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":34,"coordinates":"43.6960° N, 7.2656° E","classification":"Mediterranean Coastline","description":"Curve of the Baie des Anges lined with Belle Époque hotels, azure waters, and palm trees stirring under warm maritime breezes.","notes":"A celebrated winter refuge for European aristocracy since the late 18th century."},{"file":"https://images.unsplash.com/photo-1513581166391-887a96ddeafd?auto=format&fit=crop&w=1760&q=80","title":"Strasbourg Old Town","place":"La Petite France","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":35,"coordinates":"48.5800° N, 7.7420° E","classification":"Alsatian Half-Timbering","description":"Steep timbered gables and flower-filled wooden balconies overlook the locks of the River Ill under the shadow of pink sandstone spires.","notes":"Historic tanners’ district featuring 16th and 17th-century half-timbered architecture."},{"file":"https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1760&q=80","title":"Lavender Fields of Provence","place":"Plateau de Valensole","chapter":4,"chapterTitle":"Chapter 04 — FRANCE","country":"France","countryCode":"FR","plateNumber":36,"coordinates":"43.8375° N, 5.9840° E","classification":"Agricultural Cultural Landscape","description":"Endless rolling waves of fragrant violet blossom stretch toward distant limestone foothills beneath the clear singing light of the south.","notes":"Cultivated for centuries for fine essential oils; blooming throughout June and July."},{"file":"https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1760&q=80","title":"Taj Mahal","place":"Agra","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":37,"coordinates":"27.1751° N, 78.0421° E","classification":"Mughal Marble Mausoleum","description":"Pure translucent Makrana marble reflects the blush of sunrise over the Yamuna River, framed by four slender minarets and floral pietra dura inlay.","notes":"Commissioned by Mughal Emperor Shah Jahan in 1632 for his beloved wife Mumtaz Mahal."},{"file":"https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1760&q=80","title":"Hawa Mahal","place":"Jaipur","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":38,"coordinates":"26.9239° N, 75.8267° E","classification":"Rajput Honeycomb Palace","description":"A five-storey pink and red sandstone facade carved with 953 jharokha casements, designed like Lord Krishna’s crown to catch cool mountain breezes.","notes":"Built in 1799 by Maharaja Sawai Pratap Singh; designed by Lal Chand Ustad."},{"file":"https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1760&q=80","title":"Gateway of India","place":"Mumbai Waterfront","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":39,"coordinates":"18.9220° N, 72.8347° E","classification":"Indo-Saracenic Monument","description":"Basalt arches incorporating 16th-century Gujarati architectural motifs overlook Mumbai Harbour, where yellow fishing boats rock in the Arabian Sea swell.","notes":"Erected to commemorate the 1911 landing of King George V; architect George Wittet."},{"file":"https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1760&q=80","title":"India Gate","place":"New Delhi","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":40,"coordinates":"28.6129° N, 77.2295° E","classification":"National Memorial Arch","description":"Pale red Bharatpur sandstone triumphal arch stands at the eastern end of the ceremonial Rajpath, framed by green lawns and royal canopies.","notes":"Designed by Sir Edwin Lutyens; height 42 meters; dedicated in 1931."},{"file":"https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1760&q=80","title":"Hampi Monuments","place":"Vijayanagara","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":41,"coordinates":"15.3350° N, 76.4600° E","classification":"Stone Temple Ruins","description":"Ornate granite stone chariot and musical pillars emerge from a surreal boulder-strewn landscape along the banks of the sacred Tungabhadra River.","notes":"Capital of the Vijayanagara Empire from 1336 to 1565; UNESCO World Heritage Site."},{"file":"https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1760&q=80","title":"Varanasi Ghats","place":"Ganges River","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":42,"coordinates":"25.3176° N, 82.9739° E","classification":"Sacred Riverbank Steps","description":"Eighty-four stone stairways descending into the sacred river, where morning bathers offer prayers to the rising sun amidst floating marigold petals.","notes":"One of the world’s oldest continuously inhabited cities, sacred to Hinduism and Buddhism."},{"file":"https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1760&q=80","title":"Meenakshi Amman Temple","place":"Madurai","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":43,"coordinates":"9.9195° N, 78.1193° E","classification":"Dravidian Temple Towers","description":"Fourteen monumental gopuram gate towers covered in thousands of painted mythological figures and celestial guardians soar over the ancient lotus-shaped city.","notes":"Dravidian masterpiece with core origins traced to the 6th century BC; present towers 16th century."},{"file":"https://images.unsplash.com/photo-1599837565318-67429bde7162?auto=format&fit=crop&w=1760&q=80","title":"Konark Sun Temple","place":"Puri Coast","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":44,"coordinates":"19.8876° N, 86.0945° E","classification":"Kalinga Stone Chariot","description":"A colossal 13th-century stone chariot carved with twenty-four giant wheels and seven horses, celebrating the sun god Surya on the Bay of Bengal.","notes":"Built by King Narasimhadeva I of the Eastern Ganga Dynasty c. 1250; UNESCO World Heritage Site."},{"file":"https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1760&q=80","title":"Kerala Backwaters","place":"Alleppey / Alappuzha","chapter":5,"chapterTitle":"Chapter 05 — INDIA","country":"India","countryCode":"IN","plateNumber":45,"coordinates":"9.4981° N, 76.3388° E","classification":"Equatorial Lagoon Network","description":"Thatched kettuvallam houseboats drift serenely down tranquil brackish canals fringed by leaning coconut palms and emerald paddy fields.","notes":"Over 900 kilometers of interconnected lagoons, lakes, and canals fed by 38 rivers."},{"file":"https://images.unsplash.com/photo-1543731068-7e0f5beff43a?auto=format&fit=crop&w=1760&q=80","title":"Statue of Liberty","place":"New York Harbor","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":46,"coordinates":"40.6892° N, 74.0445° E","classification":"Colossal Copper Sculpture","description":"Verdigris copper drapery catches the Atlantic wind as Lady Liberty lifts her radiant torch over upper New York Bay.","notes":"Sculpted by Frédéric-Auguste Bartholdi with internal framework by Gustave Eiffel; dedicated 1886."},{"file":"https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=1760&q=80","title":"Golden Gate Bridge","place":"San Francisco","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":47,"coordinates":"37.8199° N, 122.4783° E","classification":"Art Deco Suspension Bridge","description":"International Orange steel towers soar through swirling Pacific marine fog, spanning the mile-wide strait connecting bay and ocean.","notes":"Engineered by Joseph Strauss, Charles Ellis, and Irving Morrow; opened May 1937."},{"file":"https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?auto=format&fit=crop&w=1760&q=80","title":"Grand Canyon","place":"South Rim","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":48,"coordinates":"36.0544° N, 112.1401° E","classification":"Geological Chasm","description":"Banded sedimentary strata of crimson shale, sandstone, and Kaibab limestone plunging a vertical mile down to the silver Colorado River.","notes":"Exposing nearly two billion years of Earth’s geological history across 446 kilometers."},{"file":"https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=1760&q=80","title":"Yosemite Valley","place":"Sierra Nevada","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":49,"coordinates":"37.7456° N, 119.5936° E","classification":"Glacial Granite Valley","description":"Monolithic granite faces of El Capitan and Half Dome frame tumbling water falls and pine forests carved by ancient Pleistocene glaciers.","notes":"Glacial valley protected since 1864 under the Yosemite Grant signed by Abraham Lincoln."},{"file":"https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1760&q=80","title":"Central Park","place":"Manhattan","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":50,"coordinates":"40.7829° N, 73.9654° E","classification":"Urban Landscape Park","description":"Cast-iron Bow Bridge arches across the Ramble lake, where yellow fall foliage contrasts against Manhattan’s vertical skyline.","notes":"Designed by Frederick Law Olmsted and Calvert Vaux; completed in 1876."},{"file":"https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?auto=format&fit=crop&w=1760&q=80","title":"Monument Valley","place":"Navajo Nation","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":51,"coordinates":"36.9980° N, 110.0985° E","classification":"Desert Sandstone Buttes","description":"Solitary red sandstone mittens and mesas tower up to 300 meters above the flat desert floor under an immense American sky.","notes":"Sacred ancestral homeland of the Diné (Navajo) people, carved from De Chelly Sandstone."},{"file":"https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1760&q=80","title":"Brooklyn Bridge","place":"East River","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":52,"coordinates":"40.7061° N, 73.9969° E","classification":"Gothic-Revival Suspension Bridge","description":"Dual limestone neo-Gothic towers pierced by pointed arches support a dense web of diagonal steel stays spanning the tidal East River.","notes":"Engineered by John, Washington, and Emily Warren Roebling; opened May 1883."},{"file":"https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1760&q=80","title":"Antelope Canyon","place":"Page","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":53,"coordinates":"36.8619° N, 111.3743° E","classification":"Slot Canyon Formations","description":"Flowing undulating Navajo sandstone corridors carved by flash floods, glowing with reflected amber and violet light from above.","notes":"Known as Tsé bighánílíní (\"the place where water runs through rocks\") by the Navajo."},{"file":"https://images.unsplash.com/photo-1541480601022-2308c0f02487?auto=format&fit=crop&w=1760&q=80","title":"Mount Rushmore","place":"Black Hills","chapter":6,"chapterTitle":"Chapter 06 — UNITED STATES","country":"United States","countryCode":"US","plateNumber":54,"coordinates":"43.8791° N, 103.4591° E","classification":"Monumental Granite Carving","description":"Sixty-foot colossal portraits of four presidents carved directly into the Harney Peak granite batholith of the Black Hills.","notes":"Sculpted by Gutzon Borglum and 400 workers between 1927 and 1941."},{"file":"https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1760&q=80","title":"Matterhorn","place":"Zermatt","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":55,"coordinates":"45.9763° N, 7.6586° E","classification":"Pyramidal Alpine Horn","description":"An isolated four-sided pyramid of gneiss and schist thrusts into the alpine sky, trailing a delicate banner cloud from its summit ridge.","notes":"First climbed by Edward Whymper’s team in July 1865; altitude 4,478 meters."},{"file":"https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1760&q=80","title":"Chapel Bridge","place":"Reuss River","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":56,"coordinates":"47.0516° N, 8.3074° E","classification":"Covered Wooden Footbridge","description":"A diagonal timber bridge dating to 1333 spans the Reuss, housing triangular roof paintings of Swiss history beside an octagonal water tower.","notes":"The oldest surviving wooden truss bridge in Europe; spans 204 meters."},{"file":"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1760&q=80","title":"Lauterbrunnen Valley","place":"Interlaken Region","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":57,"coordinates":"46.5935° N, 7.9090° E","classification":"Glacial U-Shaped Valley","description":"Vertical limestone cliffs punctuated by seventy-two roaring waterfalls plunging into an emerald alpine meadow dotted with timber chalets.","notes":"Inspiration for J.R.R. Tolkien’s mythical valley of Rivendell after his 1911 journey."},{"file":"https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1760&q=80","title":"Lake Geneva","place":"Lavaux Terraces","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":58,"coordinates":"46.4950° N, 6.7450° E","classification":"Perialpine Crescent Lake","description":"Terraced stone vineyards descending steep sun-drenched hillsides to deep blue waters, with the snowcapped French Chablais Alps beyond.","notes":"Lavaux vineyards cultivated by Cistercian monks since the 11th century; UNESCO site."},{"file":"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1760&q=80","title":"Jungfraujoch","place":"Aletsch Glacier","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":59,"coordinates":"46.5475° N, 7.9822° E","classification":"Alpine Saddle & Ice Palace","description":"Perched at 3,454 meters between the Jungfrau and Mönch, looking out over the immense serpentine curve of the Great Aletsch Glacier.","notes":"Connected by a cogwheel railway tunneled through the Eiger rock; completed in 1912."},{"file":"https://images.unsplash.com/photo-1502784444187-359ac186c5bb?auto=format&fit=crop&w=1760&q=80","title":"Zermatt Village","place":"Matter Valley","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":60,"coordinates":"45.9763° N, 7.7491° E","classification":"Alpine Wood Architecture","description":"Sun-blackened larch wood barns raised on circular rodent-guard stone discs (mazots), decorated with vibrant red geraniums.","notes":"Car-free mountain resort maintaining traditional 17th and 18th-century timber chalets."},{"file":"https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1760&q=80","title":"Rhine Falls","place":"Neuhausen am Rheinfall","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":61,"coordinates":"47.6779° N, 8.6156° E","classification":"River Cascade & Limestone Crag","description":"The most powerful waterfall in mainland Europe roars over jagged limestone reefs, sending sheets of white foam and rainbows into the river.","notes":"Width 150 meters, drop 23 meters; formed in the last ice age approximately 15,000 years ago."},{"file":"https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1760&q=80","title":"Château de Chillon","place":"Montreux","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":62,"coordinates":"46.4142° N, 6.9275° E","classification":"Island Fortress Castle","description":"An oval medieval fortress perched on an isolated limestone rock in Lake Geneva, protected by double defensive ramparts and Romanesque keeps.","notes":"Seat of the Counts of Savoy; immortalized by Lord Byron’s 1816 poem The Prisoner of Chillon."},{"file":"https://images.unsplash.com/photo-1573108724029-4c46571d6490?auto=format&fit=crop&w=1760&q=80","title":"Bern Old Town","place":"Aare Peninsula","chapter":7,"chapterTitle":"Chapter 07 — SWITZERLAND","country":"Switzerland","countryCode":"CH","plateNumber":63,"coordinates":"46.9480° N, 7.4474° E","classification":"Medieval Sandstone City","description":"Six kilometers of covered sandstone arcades (Lauben), Renaissance figured fountains, and the 15th-century astronomical Zytglogge clock tower.","notes":"Founded in 1191 in a tight loop of the turquoise Aare River; UNESCO World Heritage Site."},{"file":"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1760&q=80","title":"Great Pyramid of Giza","place":"Giza Plateau","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":64,"coordinates":"29.9792° N, 31.1342° E","classification":"Ancient Royal Tomb","description":"Over two million cut limestone blocks aligned with astronomical precision to the cardinal points, standing resilient against desert winds.","notes":"Constructed for Pharaoh Khufu c. 2560 BC; the oldest and only intact Ancient Wonder of the World."},{"file":"https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1760&q=80","title":"Great Sphinx of Giza","place":"Giza Plateau","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":65,"coordinates":"29.9753° N, 31.1376° E","classification":"Monolithic Limestone Sphinx","description":"A mythical lion body with the head of Pharaoh Khafre gazes eastward toward the Nile, carved directly from the plateau bedrock.","notes":"Length 73 meters, height 20 meters; carved during the Old Kingdom Fourth Dynasty c. 2500 BC."},{"file":"https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1760&q=80","title":"Karnak Temple","place":"Thebes East Bank","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":66,"coordinates":"25.7188° N, 32.6573° E","classification":"Great Hypostyle Hall","description":"One hundred and thirty-four colossal sandstone papyrus columns rise like a petrified forest, carved with deep hieroglyphs and battle reliefs.","notes":"Developed over two thousand years from the Middle Kingdom through the Ptolemaic period."},{"file":"https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1760&q=80","title":"Abu Simbel","place":"Lake Nasser","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":67,"coordinates":"22.3372° N, 31.6258° E","classification":"Rock-Cut Temple Façade","description":"Four colossal seated statues of Ramesses II carved into the cliff face, welcoming the sunrise twice each year into the deepest sanctuary.","notes":"Relocated block by block in 1968 to save the temples from the rising waters of Lake Nasser."},{"file":"https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1760&q=80","title":"Valley of the Kings","place":"Thebes West Bank","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":68,"coordinates":"25.7402° N, 32.6014° E","classification":"Royal Necropolis","description":"Arid desert canyon sheltered beneath a natural pyramid peak, where rock-cut corridors descend to painted tomb chambers of New Kingdom pharaohs.","notes":"Over sixty royal tombs including Tutankhamun (KV62) and Seti I (KV17); designated UNESCO site."},{"file":"https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=1760&q=80","title":"Luxor Temple","place":"Thebes East Bank","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":69,"coordinates":"25.6995° N, 32.6392° E","classification":"Amun-Re Sanctuary Complex","description":"Pylon gateways flanked by colossal statues of Ramesses II and a solitary pink granite obelisk, leading into courtyard colonnades.","notes":"Center of the annual Opet Festival; connected to Karnak by a three-kilometer Avenue of Sphinxes."},{"file":"https://images.unsplash.com/photo-1539768942893-daf53e448371?auto=format&fit=crop&w=1760&q=80","title":"Nile River Landscapes","place":"Aswan to Kom Ombo","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":70,"coordinates":"24.0889° N, 32.8998° E","classification":"Historic River Corridor","description":"Traditional wooden feluccas with triangular lateen sails drifting past date palm groves, golden sand dunes, and granite cataracts.","notes":"The longest river in Africa, whose annual inundation sustained Egyptian civilization for millennia."},{"file":"https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1760&q=80","title":"Philae Temple","place":"Agilkia Island","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":71,"coordinates":"24.0253° N, 32.8842° E","classification":"Isis Sanctuary & Kiosk of Trajan","description":"Hypaethral Trajan’s Kiosk with lotus flower capitals reflected in the calm waters of the Nile reservoir, dedicated to the mother goddess Isis.","notes":"Rescued from flooding and reassembled on Agilkia Island under a UNESCO project in the 1970s."},{"file":"https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1760&q=80","title":"Egyptian Museum","place":"Tahrir Square","chapter":8,"chapterTitle":"Chapter 08 — EGYPT","country":"Egypt","countryCode":"EG","plateNumber":72,"coordinates":"30.0478° N, 31.2336° E","classification":"Neoclassical Antiquities Palace","description":"Distinguished dusty rose neoclassical facade designed by Marcel Dourgnon in 1901, housing over a century of golden Pharaonic discoveries.","notes":"The oldest archaeological museum in the Middle East, preserving over 120,000 antiquities."},{"file":"https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1760&q=80","title":"Big Ben & Palace of Westminster","place":"Westminster","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":73,"coordinates":"51.5007° N, 0.1246° W","classification":"Perpendicular Gothic Revival","description":"Elizabeth Tower’s gilded clock faces and Gothic pinnacles cast long shadows over the tidal Thames as the Great Bell tolls the hour.","notes":"Rebuilt by Sir Charles Barry and Augustus Pugin after the fire of 1834; limestone and cast-iron roof."},{"file":"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1760&q=80","title":"Tower Bridge","place":"River Thames","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":74,"coordinates":"51.5055° N, 0.0754° W","classification":"Victorian Bascule & Suspension","description":"Twin Cornish granite-clad Gothic towers linked by elevated walkways, spanning hydraulic bascules that lift for tall-masted river traffic.","notes":"Designed by Sir Horace Jones and Sir John Wolfe Barry; opened June 1894."},{"file":"https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=1760&q=80","title":"Edinburgh Castle","place":"Castle Rock","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":75,"coordinates":"55.9486° N, 3.1999° W","classification":"Volcanic Fortress Citadel","description":"Ancient stone battlements and the Half Moon Battery crown the dark basalt volcanic plug, dominating the medieval Royal Mile below.","notes":"Royal residence dating from the 12th century; holds the Honours of Scotland (crown jewels)."},{"file":"https://images.unsplash.com/photo-1599833975787-5c143f373c30?auto=format&fit=crop&w=1760&q=80","title":"Stonehenge","place":"Salisbury Plain","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":76,"coordinates":"51.1789° N, 1.8262° W","classification":"Neolithic Megalithic Ring","description":"Towering sarsen trilithons and lintels aligned with solstitial sunrise, weathered by four thousand years of Atlantic rain and wind.","notes":"Constructed in multiple phases from c. 3000 BC to 2000 BC; blue stones transported from Wales."},{"file":"https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=1760&q=80","title":"Roman Baths","place":"Bath","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":77,"coordinates":"51.3810° N, 2.3590° W","classification":"Thermal Spring Complex","description":"Steaming geothermal mineral water fills the Great Bath lined with lead sheets, surrounded by Roman column bases and 19th-century terrace statues.","notes":"Constructed by the Romans c. 60–70 AD around natural hot springs producing 46°C water."},{"file":"https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?auto=format&fit=crop&w=1760&q=80","title":"Tower of London","place":"White Tower","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":78,"coordinates":"51.5081° N, 0.0759° W","classification":"Norman Royal Keep & Fortress","description":"William the Conqueror’s four-turreted White Tower built of Caen stone, guarding the eastern gate of London beside the Traitors’ Gate.","notes":"Begun in 1078; served as royal residence, prison, armory, and home of the Crown Jewels."},{"file":"https://images.unsplash.com/photo-1533929736458-ca588d08c8be?auto=format&fit=crop&w=1760&q=80","title":"St Paul’s Cathedral","place":"Ludgate Hill","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":79,"coordinates":"51.5138° N, 0.0984° W","classification":"English Baroque Cathedral","description":"Sir Christopher Wren’s lead-clad dome and two-tier western portico rise serenely above the rooftops of the square mile.","notes":"Rebuilt between 1675 and 1710 following the Great Fire of London; three-shell dome structure."},{"file":"https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1760&q=80","title":"Lake District","place":"Derwentwater & Borrowdale","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":80,"coordinates":"54.5800° N, 3.1400° W","classification":"Glacial Valley & Fell Landscape","description":"Craggy slate fells, dry-stone sheep folds, and ancient sessile oak woods mirrored in the glassy waters of Derwentwater.","notes":"Inspiration for the Romantic poets Wordsworth, Coleridge, and Southey; UNESCO site."},{"file":"https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1760&q=80","title":"Glenfinnan Viaduct","place":"Loch Shiel","chapter":9,"chapterTitle":"Chapter 09 — UNITED KINGDOM","country":"United Kingdom","countryCode":"GB","plateNumber":81,"coordinates":"56.8763° N, 5.4319° W","classification":"Mass Concrete Railway Viaduct","description":"A sweeping curve of twenty-one semi-circular concrete arches carrying the West Highland Line across the peat glen toward Loch Shiel.","notes":"Constructed by Robert McAlpine between 1897 and 1901 using unreinforced mass concrete."},{"file":"https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1760&q=80","title":"Milford Sound","place":"Piopiotahi / Fiordland","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":82,"coordinates":"44.6715° S, 167.9256° E","classification":"Glacial Fjord & Mitre Peak","description":"Dark ink-blue waters reflect Mitre Peak rising sheer 1,692 meters from sea level, while temporary waterfalls cascade through rainforest mist.","notes":"Carved by glaciers during successive ice ages; annual rainfall exceeds 6,800 millimeters."},{"file":"https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1760&q=80","title":"Aoraki / Mount Cook","place":"Southern Alps","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":83,"coordinates":"43.5950° S, 170.1418° E","classification":"Glaciated Alpine Summit","description":"The highest peak in Aotearoa crowned with permanent hanging glaciers and jagged aretes, towering above Hooker Valley’s glacial moraines.","notes":"Sacred ancestor in Ngāi Tahu Māori tradition; elevation 3,724 meters."},{"file":"https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1760&q=80","title":"Hobbiton Movie Set","place":"Matamata","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":84,"coordinates":"37.8721° S, 175.6829° E","classification":"Vernacular Earth-Sheltered Dwellings","description":"Round timber doors and stone chimneys embedded in rolling clover hills, surrounded by vegetable gardens, picket fences, and weeping willows.","notes":"Permanent set rebuilt for The Hobbit films on the Alexander sheep farm; 44 hobbit holes."},{"file":"https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=1760&q=80","title":"Lake Tekapo","place":"Church of the Good Shepherd","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":85,"coordinates":"44.0040° S, 170.4770° E","classification":"Glacial Flour Lake & Fieldstone Chapel","description":"Opaque turquoise water tinted by rock flour laps against shorelines covered in purple Russell lupins beside an unadorned fieldstone chapel.","notes":"Part of the Aoraki Mackenzie International Dark Sky Reserve; chapel built in 1935."},{"file":"https://images.unsplash.com/photo-1589802829985-817e51171b92?auto=format&fit=crop&w=1760&q=80","title":"Auckland Sky Tower","place":"Waitematā Harbour","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":86,"coordinates":"36.8485° S, 174.7633° E","classification":"Telecommunications & Observation Spire","description":"Slender reinforced concrete mast puncturing the Pacific sky between the sparkling Waitematā and Manukau volcanic harbours.","notes":"Completed in 1997; height 328 meters, designed to withstand 200 km/h winds."},{"file":"https://images.unsplash.com/photo-1575986767340-5d17ae767ab0?auto=format&fit=crop&w=1760&q=80","title":"Wai-O-Tapu Geothermal Landscape","place":"Rotorua","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":87,"coordinates":"38.3582° S, 176.3683° E","classification":"Active Hydrothermal Caldera","description":"Champagne Pool bubbling with mineral effervescence, ringed by vibrant orange sinter terraces and steaming fumaroles amidst native manuka.","notes":"Māori for \"sacred waters\"; geothermal activity shaped by the Okataina Volcanic Centre."},{"file":"https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=1760&q=80","title":"Queenstown","place":"Lake Wakatipu & The Remarkables","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":88,"coordinates":"45.0312° S, 168.6626° E","classification":"Glacial Lake & Razor Ridge","description":"Steep jagged quartzite crests of The Remarkables plunge straight into deep glacial waters, where the historic TSS Earnslaw steamship departs.","notes":"Lake Wakatipu exhibits a unique 27-minute seiche rhythm rising and falling 20 centimeters."},{"file":"https://images.unsplash.com/photo-1488441770602-aed21fc49bd5?auto=format&fit=crop&w=1760&q=80","title":"Tongariro Alpine Crossing","place":"Emerald Lakes","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":89,"coordinates":"39.1415° S, 175.5870° E","classification":"Volcanic Alpine Caldera","description":"Luminous jade-green explosion craters steaming on barren scree slopes below the symmetrical volcanic cone of Mount Ngauruhoe.","notes":"New Zealand’s oldest national park, gifted to the nation in 1887 by Paramount Chief Te Heuheu Tukino IV."},{"file":"https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1760&q=80","title":"Cathedral Cove","place":"Te Whanganui-A-Hei","chapter":10,"chapterTitle":"Chapter 10 — NEW ZEALAND","country":"New Zealand","countryCode":"NZ","plateNumber":90,"coordinates":"36.8285° S, 175.7905° E","classification":"Coastal Sea Arch & Marine Reserve","description":"A soaring natural Gothic cavern carved through pure white ignimbrite rock links two secluded pohutukawa-fringed golden beaches.","notes":"Named for the cathedral-like proportions of its sea-carved limestone archway."},{"file":"https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1760&q=80","title":"Hagia Sophia","place":"Sultanahmet, Istanbul","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":91,"coordinates":"41.0086° N, 28.9802° E","classification":"Byzantine Dome & Ottoman Minarets","description":"A colossal brick dome supported by pendentives seems to hang suspended by a golden chain from heaven, flanked by four red-brick Ottoman minarets.","notes":"Consecrated in 537 AD under Emperor Justinian I; architects Isidore of Miletus and Anthemius of Tralles."},{"file":"https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&w=1760&q=80","title":"Blue Mosque","place":"Sultanahmet, Istanbul","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":92,"coordinates":"41.0054° N, 28.9768° E","classification":"Classical Ottoman Imperial Mosque","description":"Cascading domes and semi-domes flanked by six slender fluted minarets, sheltering interior galleries lined with twenty thousand handmade Iznik tiles.","notes":"Commissioned by Sultan Ahmed I; built 1609–1616 by imperial architect Sedefkar Mehmed Agha."},{"file":"https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1760&q=80","title":"Cappadocia","place":"Göreme Valley","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":93,"coordinates":"38.6431° N, 34.8289° E","classification":"Tufa Rock Formations & Cave Chapels","description":"Fairy chimneys carved from volcanic ash and basalt caps rise over honeycomb valleys, dotted with hot-air balloons rising into the sunrise.","notes":"Eroded tufa landscape housing subterranean cities and rock-hewn Byzantine frescoed chapels."},{"file":"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1760&q=80","title":"Pamukkale","place":"Denizli Province","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":94,"coordinates":"37.9250° N, 29.1213° E","classification":"Travertine Thermal Terraces","description":"Brilliant white cascades of petrified limestone terraces filled with warm calcium-rich turquoise water cascading down the mountain side.","notes":"Known as the \"Cotton Castle\"; adjacent to the ancient Greco-Roman spa city of Hierapolis."},{"file":"https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1760&q=80","title":"Ephesus","place":"Library of Celsus","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":95,"coordinates":"37.9392° N, 27.3409° E","classification":"Roman Monumental Facade","description":"Two-tier Corinthian marble facade featuring paired columns, decorated aedicules, and statues representing Wisdom, Knowledge, and Virtue.","notes":"Built c. 114–117 AD in honor of Roman Senator Tiberius Julius Celsus Polemaeanus."},{"file":"https://images.unsplash.com/photo-1545459720-aac8509eb02c?auto=format&fit=crop&w=1760&q=80","title":"Galata Tower","place":"Karaköy","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":96,"coordinates":"41.0256° N, 28.9741° E","classification":"Genoese Masonry Watchtower","description":"Conical lead cap crowns a massive Romanesque stone tower standing sentinel over the Golden Horn and the historic Genoese quarter.","notes":"Built as Christea Turris in 1348 by the Genoese community of Galata; height 67 meters."},{"file":"https://images.unsplash.com/photo-1570939274717-7eda259b50ed?auto=format&fit=crop&w=1760&q=80","title":"Topkapi Palace","place":"Sarayburnu","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":97,"coordinates":"41.0115° N, 28.9833° E","classification":"Ottoman Imperial Palace Complex","description":"The Imperial Gate, Fountain of Ahmed III, and ornate pavilions of the Fourth Courtyard overlooking the confluence of the Bosphorus and Marmara.","notes":"Administrative heart of the Ottoman Empire from the conquest of 1453 until 1856."},{"file":"https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1760&q=80","title":"Mount Nemrut","place":"Adıyaman","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":98,"coordinates":"37.9806° N, 38.7408° E","classification":"Hierotheseion & Colossal Stone Heads","description":"Gigantic carved stone heads of King Antiochus I, Apollo-Mithra, and Hercules resting in mountain gravel at the summit of a gravel tumulus.","notes":"Built in the 1st century BC by the Commagene kingdom at an altitude of 2,134 meters."},{"file":"https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1760&q=80","title":"Bosphorus Waterfront","place":"Ortaköy","chapter":11,"chapterTitle":"Chapter 11 — TURKEY","country":"Turkey","countryCode":"TR","plateNumber":99,"coordinates":"41.0475° N, 29.0270° E","classification":"Neo-Baroque Mosque & Suspension Bridge","description":"The ornate neo-baroque Ortaköy Mosque sits directly at the water’s edge beneath the sweeping suspension cables of the Bosphorus Bridge.","notes":"Designed by Armenian architect Garabet Balyan; connects Europe and Asia across the strait."},{"file":"https://images.unsplash.com/photo-1505995433366-e12047f3f144?auto=format&fit=crop&w=1760&q=80","title":"Borobudur","place":"Kedu Plain, Magelang","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":100,"coordinates":"7.6079° S, 110.2038° E","classification":"Mahayana Buddhist Mandala Monument","description":"Nine stacked stone platforms carved from volcanic andesite crowned by seventy-two perforated stupas holding Buddha statues, rising above morning mist.","notes":"Constructed in the 8th and 9th centuries during the Shailendra dynasty; largest Buddhist temple in the world."},{"file":"https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=1760&q=80","title":"Prambanan","place":"Sleman","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":101,"coordinates":"7.7520° S, 110.4914° E","classification":"Trimurti Hindu Temple Compound","description":"Tall pointed stone spires dedicated to Shiva, Brahma, and Vishnu soar 47 meters above courtyard shrines carved with Ramayana narrative reliefs.","notes":"Built in the 9th century by the Mataram Kingdom; exemplar of classical Hindu temple architecture."},{"file":"https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1760&q=80","title":"Tanah Lot","place":"Tabanan","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":102,"coordinates":"8.6212° S, 115.0868° E","classification":"Sea Temple & Wave-Cut Offshore Rock","description":"A sacred thatched meru shrine perched atop a wave-sculpted offshore crag, enveloped in Indian Ocean spray under golden Balinese sunsets.","notes":"Founded in the 16th century by Dang Hyang Nirartha; one of seven sea temples guarding the Balinese coast."},{"file":"https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1760&q=80","title":"Uluwatu Temple","place":"Bukit Peninsula","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":103,"coordinates":"8.8291° S, 115.0849° E","classification":"Cliff-Edge Sea Temple","description":"A black coral stone shrine balanced on the edge of a sheer 70-meter limestone cliff dropping into pounding surf, guarded by native macaque monkeys.","notes":"Dedicated to the supreme water spirits (Sang Hyang Widhi Wasa in manifestation as Rudra)."},{"file":"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1760&q=80","title":"Mount Bromo","place":"Bromo Tengger Semeru","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":104,"coordinates":"7.9425° S, 112.9530° E","classification":"Active Volcanic Somma & Sand Sea","description":"Active steaming crater emitting plumes of white ash over the vast Sea of Sand, backed by the fluted ridges of Mount Batok at dawn.","notes":"Sacred to the Hindu Tenggerese people who conduct the annual Yadnya Kasada offering ceremony."},{"file":"https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1760&q=80","title":"Tegallalang Rice Terraces","place":"Ubud","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":105,"coordinates":"8.4344° S, 115.2796° E","classification":"Subak Irrigation Agricultural Terraces","description":"Stepped emerald paddies carved into ravine walls following natural topographical contours, irrigated by ancient communal subak canals.","notes":"Traditional Balinese subak water management system dated to the 9th century; UNESCO World Heritage."},{"file":"https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?auto=format&fit=crop&w=1760&q=80","title":"Komodo National Park","place":"Padar Island","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":106,"coordinates":"8.6500° S, 119.5700° E","classification":"Volcanic Archipelago & Dragon Habitat","description":"Serrated volcanic ridges of Padar Island overlooking three crescent bays of pink, black, and white sand in the sapphire Flores Sea.","notes":"Habitat of the endemic Komodo dragon (Varanus komodoensis), the world’s largest living lizard."},{"file":"https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1760&q=80","title":"Raja Ampat","place":"Wayag Islands","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":107,"coordinates":"0.1500° S, 130.0300° E","classification":"Karst Atolls & Coral Reefs","description":"Lush green conical karst limestone islets scattered like mushroom domes across turquoise and cobalt equatorial lagoons.","notes":"Epicenter of the Coral Triangle, harboring the richest marine biodiversity recorded on Earth."},{"file":"https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=1760&q=80","title":"Jakarta Old Town","place":"Fatahillah Square, Kota Tua","chapter":12,"chapterTitle":"Chapter 12 — INDONESIA","country":"Indonesia","countryCode":"ID","plateNumber":108,"coordinates":"6.1352° S, 106.8133° E","classification":"Dutch Colonial Stadhuis","description":"Symmetrical 18th-century Dutch colonial city hall with bell tower and timber windows, facing a cobbled square filled with colorful vintage bicycles.","notes":"Built in 1710 as the Stadhuis of Batavia; headquarters of the Dutch East India Company (VOC)."}];
+PAGES.forEach(p => { p.url = p.file.startsWith('http') ? p.file : (DIR + p.file); });
+const M = PAGES.length;
+
+const wrap = document.getElementById('sbWrap');
+const stage = document.getElementById('sbStage');
+const sb3d = document.getElementById('sb3d');
+const book = document.getElementById('sbBook');
+const capBox = document.getElementById('sbCaptions');
+const hint = document.getElementById('sbHint');
+const chBanner = document.getElementById('chBanner');
+const chTagline = document.getElementById('chTagline');
+const plateGrid = document.getElementById('plateGrid');
+const searchInput = document.getElementById('searchInput');
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ------------------------------------------------ the turning leaf */
+const N = 18;            /* strips — smooth curve */
+const SPAN = 0.449;      /* gutter to outer page edge */
+const BETA = 0.60;       /* peak curl arc */
+let idx = 0, turn = null;
+let strips = [];
+
+function el(t, c) { const e = document.createElement(t); if(c) e.className = c; return e; }
+
+function imgEl(i, side) {
+  const im = new __threeuiStorageImage();
+  im.className = 'sb-half-img ' + side;
+  im.draggable = false;
+  im.alt = PAGES[i].title;
+  im.onerror = function() {
+    if (!this.dataset.fallback) {
+      this.dataset.fallback = '1';
+      this.src = 'meng-to-sketchbook/bg-wash.jpg';
+    }
+  };
+  im.src = PAGES[i].url;
+  return im;
+}
+
+function halfEl(pos, i) {
+  const d = el('div', 'sb-half ' + pos);
+  d.appendChild(imgEl(i, pos));
+  d.appendChild(el('div', 'gutter-shade ' + pos));
+  return d;
+}
+
+function buildCurl(dir, from, to) {
+  strips = [];
+  const c = el('div', 'curl ' + dir);
+  c.style.setProperty('--n', N);
+  c.style.setProperty('--span', SPAN);
+  let host = c;
+  for(let i=0; i<N; i++) {
+    const s = el('div', 'strip');
+    s.style.setProperty('--i', i);
+    const gut = 'calc(var(--bw) * 0.5)';
+    const sw = 'calc(var(--bw) * ' + SPAN + ' / ' + N + ')';
+    const A = 'calc(-1 * (' + gut + ' + ' + i + ' * ' + sw + '))';
+    const B = 'calc(' + (i + 1) + ' * ' + sw + ' - ' + gut + ')';
+    const f = el('div', 'face front'), b = el('div', 'face back');
+    const dress = (e, url, px) => {
+    e.style.backgroundImage = 'url("' + url + '")';
+    e.style.backgroundPositionX = px;
+  };
+    dress(f, PAGES[from].url, dir === 'next' ? A : B);
+    dress(b, PAGES[to].url,   dir === 'next' ? B : A);
+    f.appendChild(el('div', 'sh')); f.appendChild(el('div', 'gl'));
+    b.appendChild(el('div', 'sh')); b.appendChild(el('div', 'gl'));
+    s.appendChild(f); s.appendChild(b);
+    if(i === N - 1) s.classList.add('edge');
+    host.appendChild(s); host = s;
+    strips.push(s);
+  }
+  return c;
+}
+
+function applyTurn(t) {
+  const th = Math.PI * t;
+  const beta = BETA * Math.sin(Math.PI * t);
+  const D = 180 / Math.PI;
+  const tt = th + beta, td = 2 * beta / N;
+  sb3d.style.setProperty('--tt', (tt * D).toFixed(2) + 'deg');
+  sb3d.style.setProperty('--td', (td * D).toFixed(3) + 'deg');
+  sb3d.style.setProperty('--shade', Math.sin(Math.PI * t).toFixed(3));
+  fadeCaption(t);
+  for(let i=0; i<strips.length; i++) {
+    const l1 = Math.abs(Math.cos(tt - i * td));
+    const l2 = Math.abs(Math.cos(tt - (i + 1) * td));
+    const st = strips[i].style;
+    st.setProperty('--lit', l1.toFixed(3));
+    st.setProperty('--a1', ((1 - l1) * 0.62).toFixed(3));
+    st.setProperty('--a2', ((1 - l2) * 0.62).toFixed(3));
+  }
+}
+
+function paint() {
+  book.textContent = '';
+  if(!turn) {
+    const f = el('div', 'sb-full');
+    const im = new __threeuiStorageImage();
+    im.alt = PAGES[idx].title;
+    im.draggable = false;
+    im.onerror = function() {
+      if (!this.dataset.fallback) {
+        this.dataset.fallback = "1";
+        this.src = "meng-to-sketchbook/bg-wash.jpg";
+      }
+    };
+    im.src = PAGES[idx].url;
+    f.appendChild(im);
+    book.appendChild(f);
+    sb3d.style.setProperty('--shade', '0');
+  } else {
+    const next = turn.dir === 'next';
+    book.appendChild(halfEl('left', next ? turn.from : turn.to));
+    book.appendChild(halfEl('right', next ? turn.to : turn.from));
+    book.appendChild(buildCurl(turn.dir, turn.from, turn.to));
+    applyTurn(turn.t);
+  }
+  const a = el('button', 'sb-zone sb-prev'), b = el('button', 'sb-zone sb-next');
+  a.setAttribute('aria-label', 'previous page');
+  b.setAttribute('aria-label', 'next page');
+  a.onclick = (e) => { e.stopPropagation(); step('prev'); };
+  b.onclick = (e) => { e.stopPropagation(); step('next'); };
+  book.appendChild(a); book.appendChild(b);
+  layout();
+  caption();
+  updateChapterBadge();
+  highlightActivePlate();
+  notifyParent();
+  if(typeof syncZoomLayer === 'function') syncZoomLayer();
+  if(typeof placeLoupe === 'function') placeLoupe();
+}
+
+let capOut = null, capIn = null;
+function caption() {
+  capBox.textContent = '';
+  capOut = capIn = null;
+  const curr = PAGES[idx];
+  if(turn) {
+    capOut = el('p', 'sb-caption live'); capOut.textContent = PAGES[turn.from].title; capBox.appendChild(capOut);
+    capIn = el('p', 'sb-caption live'); capIn.textContent = PAGES[turn.to].title; capBox.appendChild(capIn);
+    fadeCaption(turn.t);
+  } else {
+    const p = el('p', 'sb-caption');
+    p.textContent = curr.plateNumber === 0 ? curr.title : 'Plate ' + String(curr.plateNumber).padStart(3, '0') + ' — ' + curr.title;
+    capBox.appendChild(p);
+    const sub = el('p', 'sb-caption sub');
+    sub.textContent = curr.plateNumber === 0 ? curr.place : curr.place + ' · ' + curr.country + (curr.coordinates ? ' (' + curr.coordinates + ')' : '');
+    capBox.appendChild(sub);
+  }
+}
+
+function fadeCaption(t) {
+  if(!capOut || !capIn) return;
+  const out = 1 - Math.max(0, Math.min(1, (t - 0.10) / 0.28));
+  const inn = Math.max(0, Math.min(1, (t - 0.56) / 0.30));
+  capOut.style.opacity = out.toFixed(3);
+  capIn.style.opacity = inn.toFixed(3);
+}
+
+function layout() {
+  sb3d.style.setProperty('--bw', book.clientWidth + 'px');
+}
+addEventListener('resize', layout);
+
+/* ------------------------------------------------------ spring loop */
+let spring = null;
+function animateTo(target, onDone, stiff, damp) {
+  spring = { kind: 'spring', v: 0, target: target, done: onDone, k: stiff || 150, c: damp || 22 };
+  kick();
+}
+
+let raf = null, last = 0;
+function tick(now) {
+  raf = null;
+  const dt = Math.min(0.032, (now - last) / 1000 || 0.016);
+  last = now;
+  if(spring && turn) {
+    const s = spring;
+    const x = turn.t - s.target;
+    s.v += (-s.k * x - s.c * s.v) * dt;
+    turn.t += s.v * dt;
+    if(Math.abs(turn.t - s.target) < 0.002 && Math.abs(s.v) < 0.02) {
+      turn.t = s.target; spring = null;
+      applyTurn(turn.t);
+      const d = s.done; d && d();
+    } else applyTurn(turn.t);
+  }
+  viewSpring();
+  const lmoved = loupeEase();
+  if((spring || viewActive || lmoved) && raf === null) raf = requestAnimationFrame(tick);
+}
+
+function kick() {
+  if(raf === null) { last = performance.now(); raf = requestAnimationFrame(tick); }
+}
+
+/* ------------------------------------------- tilt + zoom of the book */
+const TILT_X = 4.5, TILT_Y = 7;
+const ZOOM_MIN = 0.85, ZOOM_MAX = 1.6;
+const view = { rx: 0, ry: 0, z: 1, trx: 0, try_: 0, tz: 1 };
+let viewActive = false;
+let lastZ = 1;
+
+function applyView() {
+  sb3d.style.setProperty('--rx', view.rx.toFixed(2) + 'deg');
+  sb3d.style.setProperty('--ry', view.ry.toFixed(2) + 'deg');
+  sb3d.style.setProperty('--zoom', view.z.toFixed(3));
+  if(view.z !== lastZ) { lastZ = view.z; if(typeof placeLoupe === 'function') placeLoupe(); }
+}
+
+function viewSpring() {
+  const e = 0.14;
+  let moved = false;
+  for(const [k, t] of [['rx', 'trx'], ['ry', 'try_'], ['z', 'tz']]) {
+    const d = view[t] - view[k];
+    if(Math.abs(d) > 0.0006) { view[k] += d * e; moved = true; }
+    else view[k] = view[t];
+  }
+  if(moved) applyView();
+  viewActive = moved;
+  return moved;
+}
+
+function setView(rx, ry, z) {
+  view.trx = Math.max(-TILT_X, Math.min(TILT_X, rx));
+  view.try_ = Math.max(-TILT_Y, Math.min(TILT_Y, ry));
+  view.tz = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, z));
+  viewActive = true; kick();
+  if(typeof syncZoom === 'function') syncZoom();
+}
+
+function tiltTo(cx, cy) {
+  if(drag) return;
+  const r = book.getBoundingClientRect();
+  if(!r.width) return;
+  const nx = Math.max(-1, Math.min(1, (cx - (r.left + r.width/2)) / (r.width * 0.62)));
+  const ny = Math.max(-1, Math.min(1, (cy - (r.top + r.height/2)) / (r.height * 0.9)));
+  setView(-ny * TILT_X, nx * TILT_Y, view.tz);
+}
+
+addEventListener('pointermove', e => {
+  if(e.pointerType === 'touch') return;
+  tiltTo(e.clientX, e.clientY);
+}, { passive: true });
+addEventListener('pointerout', e => { if(!e.relatedTarget) setView(0, 0, view.tz); });
+stage.addEventListener('dblclick', () => setView(0, 0, 1));
+
+/* ------------------------------------------------------- pointer work */
+let drag = null;
+function bookRect() { return book.getBoundingClientRect(); }
+function hideHint() { hint.classList.add('gone'); }
+
+stage.addEventListener('pointerdown', e => {
+  if(e.button !== 0) return;
+  if(e.target.closest('.sb-arrow') || e.target.closest('.tool') || e.target.closest('#loupe')) return;
+  const onBook = e.target.closest('.sb-zone');
+  if(!onBook) return;
+  e.preventDefault();
+  try { stage.setPointerCapture(e.pointerId); } catch(err){}
+  hideHint();
+  const r = bookRect();
+  const dir = (e.clientX - r.left) / r.width > 0.5 ? 'next' : 'prev';
+  startTurn(dir, 0);
+  drag = { dir: dir, x0: e.clientX, w: r.width, moved: 0, vel: 0, tPrev: performance.now() };
+});
+
+stage.addEventListener('pointermove', e => {
+  if(!drag) return;
+  const dx = e.clientX - drag.x0;
+  drag.moved = Math.max(drag.moved, Math.abs(dx));
+  const raw = (drag.dir === 'next' ? -dx : dx) / (drag.w * 0.62);
+  const t = Math.max(0, Math.min(1, raw));
+  const now = performance.now();
+  drag.vel = (t - (turn ? turn.t : 0)) / Math.max(0.001, (now - drag.tPrev) / 1000);
+  drag.tPrev = now;
+  if(turn) { turn.t = t; applyTurn(t); }
+});
+
+function endDrag() {
+  if(!drag) return;
+  const d = drag; drag = null;
+  if(!turn) return;
+  if(d.moved < 6) { commit(); return; }
+  const go = turn.t > 0.42 || d.vel > 1.1;
+  if(go) commit(); else cancel();
+}
+
+stage.addEventListener('pointerup', endDrag);
+stage.addEventListener('pointercancel', endDrag);
+
+/* ------------------------------------------------------ turn control */
+function startTurn(dir, t) {
+  spring = null;
+  if(turn) { idx = turn.to; turn = null; }
+  if(typeof shoveLoupe === 'function') shoveLoupe(dir);
+  const from = idx;
+  turn = { dir: dir, from: from, to: dir === 'next' ? (from + 1) % M : (from - 1 + M) % M, t: t || 0 };
+  paint();
+}
+
+function commit() {
+  if(!turn) return;
+  const targetTo = turn.to;
+  if(REDUCED) { idx = targetTo; turn = null; paint(); return; }
+  let finished = false;
+  const finish = () => {
+    if(finished) return;
+    finished = true;
+    idx = targetTo;
+    turn = null;
+    paint();
+  };
+  animateTo(1, finish, 180, 26);
+  setTimeout(finish, 380); // Safety guarantee against dropped frames
+  kick();
+}
+
+function cancel() {
+  if(!turn) return;
+  animateTo(0, () => { turn = null; paint(); }, 150, 24);
+  kick();
+}
+
+function step(dir) {
+  if(turn) { idx = turn.to; turn = null; }
+  startTurn(dir, 0);
+  commit();
+}
+
+function goTo(i) {
+  if(i === idx) return;
+  if(turn) { idx = turn.to; turn = null; }
+  idx = Math.max(0, Math.min(M - 1, i));
+  paint();
+}
+
+const sbLeftBtn = document.getElementById('sbLeft');
+const sbRightBtn = document.getElementById('sbRight');
+function handlePrevPlate(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  hideHint();
+  step('prev');
+}
+function handleNextPlate(e) {
+  if (e) { e.preventDefault(); e.stopPropagation(); }
+  hideHint();
+  step('next');
+}
+if (sbLeftBtn) {
+  sbLeftBtn.onclick = handlePrevPlate;
+  sbLeftBtn.addEventListener('pointerdown', e => e.stopPropagation());
+}
+if (sbRightBtn) {
+  sbRightBtn.onclick = handleNextPlate;
+  sbRightBtn.addEventListener('pointerdown', e => e.stopPropagation());
+}
+
+addEventListener('keydown', e => {
+  if(e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  const t = e.target;
+  if(t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return;
+  e.preventDefault();
+  hideHint();
+  step(e.key === 'ArrowRight' ? 'next' : 'prev');
+});
+
+/* --------------------------------------------------- loupe + controls */
+const loupe = document.getElementById('loupe');
+const zRead = document.getElementById('zRead');
+const loupeBtn = document.getElementById('loupeBtn');
+const zInBtn = document.getElementById('zIn'), zOutBtn = document.getElementById('zOut');
+const resetZoomBtn = document.getElementById('resetZoomBtn');
+const MAG = 2.3;
+let loupeOn = true, lx = null, ly = null, lgrab = null, lTarget = null;
+
+function loupeSize() { return Math.round(Math.max(165, Math.min(262, book.clientWidth * 0.235))); }
+function bookBox() { return { x: 0, y: 0, w: book.clientWidth, h: book.clientHeight }; }
+
+function restLoupe() {
+  const b = bookBox();
+  lx = b.x + b.w * 0.88; ly = b.y + b.h * 0.855;
+  placeLoupe();
+}
+
+const zoomWrap = document.getElementById('zoomWrap');
+const zoomInner = document.getElementById('zoomInner');
+
+function syncZoomLayer() {
+  zoomInner.textContent = '';
+  for(const c of book.children) {
+    if(c.classList.contains('sb-zone')) continue;
+    zoomInner.appendChild(c.cloneNode(true));
+  }
+}
+
+function placeLoupe() {
+  if(lx === null) return;
+  const B = bookBox(), bw = B.w, bh = B.h;
+  if(!bw) return;
+  const R = loupeSize() / 2, bez = R * 2 * 0.058;
+  loupe.style.setProperty('--lr', R * 2 + 'px');
+  loupe.style.transform = 'translate3d(' + (lx - R).toFixed(1) + 'px,' + (ly - R).toFixed(1) + 'px,0)';
+  if(loupeOn) loupe.classList.add('on');
+  const z = view.z, cx = bw / 2, cy = bh / 2;
+  const x0 = cx + (bw * .051 - cx) * z, x1 = cx + (bw * .949 - cx) * z;
+  const y0 = cy + (bh * .218 - cy) * z, y1 = cy + (bh * .782 - cy) * z;
+  const nx = Math.max(x0, Math.min(lx, x1));
+  const ny = Math.max(y0, Math.min(ly, y1));
+  const inside = (lx > x0 && lx < x1 && ly > y0 && ly < y1)
+    ? Math.min(lx - x0, x1 - lx, ly - y0, y1 - ly)
+    : -Math.hypot(lx - nx, ly - ny);
+  const k = Math.max(0, Math.min(1, (inside + R * 0.30) / (R * 0.55)));
+  zoomWrap.style.opacity = (loupeOn ? k : 0).toFixed(3);
+  if(k <= 0.002) return;
+  const r = (R - bez).toFixed(1);
+  const mask = 'radial-gradient(circle ' + r + 'px at ' + lx.toFixed(1) + 'px ' + ly.toFixed(1) + 'px,#000 calc(100% - 1px),transparent 100%)';
+  zoomWrap.style.webkitMaskImage = mask;
+  zoomWrap.style.maskImage = mask;
+  const px = cx + (lx - cx) / z, py = cy + (ly - cy) / z, s = MAG * z;
+  zoomInner.style.transform = 'translate(' + (lx - px * s).toFixed(1) + 'px,' + (ly - py * s).toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+}
+
+function shoveLoupe(dir) {
+  if(!loupeOn || lx === null || lgrab) return;
+  const b = bookBox();
+  lTarget = { x: b.x + b.w * (dir === 'next' ? 0.12 : 0.88), y: b.y + b.h * 0.855 };
+  kick();
+}
+
+function loupeEase() {
+  if(!lTarget) return false;
+  if(lgrab) { lTarget = null; return false; }
+  const dx = lTarget.x - lx, dy = lTarget.y - ly;
+  if(Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) { lx = lTarget.x; ly = lTarget.y; lTarget = null; placeLoupe(); return false; }
+  lx += dx * 0.17; ly += dy * 0.17; placeLoupe();
+  return true;
+}
+
+loupe.addEventListener('pointerdown', e => {
+  if(!loupeOn || e.button !== 0) return;
+  e.preventDefault(); e.stopPropagation();
+  lTarget = null;
+  lgrab = { cx: e.clientX, cy: e.clientY, lx0: lx, ly0: ly };
+  loupe.classList.add('held');
+  loupe.setPointerCapture(e.pointerId);
+  hideHint();
+});
+
+loupe.addEventListener('pointermove', e => {
+  if(!lgrab) return;
+  const b = bookBox(), R = loupeSize() / 2;
+  lx = Math.max(b.x - R * 0.7, Math.min(b.x + b.w + R * 0.7, lgrab.lx0 + (e.clientX - lgrab.cx)));
+  ly = Math.max(b.y - R * 0.7, Math.min(b.y + b.h + R * 1.0, lgrab.ly0 + (e.clientY - lgrab.cy)));
+  placeLoupe();
+});
+
+function dropLoupe() { lgrab = null; loupe.classList.remove('held'); }
+loupe.addEventListener('pointerup', dropLoupe);
+loupe.addEventListener('pointercancel', dropLoupe);
+
+loupeBtn.onclick = () => {
+  loupeOn = !loupeOn;
+  loupeBtn.setAttribute('aria-pressed', String(loupeOn));
+  loupe.classList.toggle('on', loupeOn);
+  if(loupeOn && lx === null) restLoupe();
+};
+
+function syncZoom() {
+  zRead.textContent = Math.round(view.tz * 100) + '%';
+  zOutBtn.disabled = view.tz <= ZOOM_MIN + 0.001;
+  zInBtn.disabled = view.tz >= ZOOM_MAX - 0.001;
+}
+
+zInBtn.onclick = () => { setView(view.trx, view.try_, view.tz * 1.16); hideHint(); };
+zOutBtn.onclick = () => { setView(view.trx, view.try_, view.tz / 1.16); hideHint(); };
+resetZoomBtn.onclick = () => { setView(0, 0, 1); hideHint(); };
+
+/* ------------------------------------------------ Chapter & Plates sync */
+function updateChapterBadge() {
+  const curr = PAGES[idx];
+  const chNum = curr.chapter;
+  document.querySelectorAll('.ch-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.ch, 10) === chNum);
+  });
+  if(chNum === 0) {
+    chBanner.textContent = 'FOLIO INTRODUCTION';
+    chTagline.textContent = '12 Geographic Chapters · 108 Illustrated Plates Collected Worldwide';
+  } else {
+    const ch = CHAPTER_INFO.find(c => c.num === chNum);
+    chBanner.textContent = 'CHAPTER ' + String(chNum).padStart(2, '0') + ' — ' + (ch ? ch.country.toUpperCase() : curr.country.toUpperCase());
+    chTagline.textContent = ch ? ch.tagline + ' · ' + ch.intro : curr.description;
+  }
+}
+
+// Chapter Bar button events
+document.querySelectorAll('.ch-btn').forEach(btn => {
+  btn.onclick = () => {
+    const ch = parseInt(btn.dataset.ch, 10);
+    if(ch === 0) { goTo(0); }
+    else {
+      // Find start plate of chapter
+      const targetIdx = PAGES.findIndex(p => p.chapter === ch);
+      if(targetIdx !== -1) goTo(targetIdx);
+    }
+  };
+});
+
+/* ------------------------------------------------ Render Plate Grid Index */
+function renderPlateGrid(items) {
+  plateGrid.textContent = '';
+  items.forEach(p => {
+    const li = el('li', 'plate-item' + (PAGES.indexOf(p) === idx ? ' active' : ''));
+    li.dataset.idx = PAGES.indexOf(p);
+    const meta = el('div', 'plate-meta');
+    meta.innerHTML = '<span>' + (p.plateNumber === 0 ? 'COVER' : 'PLATE ' + String(p.plateNumber).padStart(3, '0')) + '</span><span>' + p.countryCode + '</span>';
+    const tit = el('h3', 'plate-title'); tit.textContent = p.title;
+    const plc = el('p', 'plate-place'); plc.textContent = p.place;
+    li.appendChild(meta); li.appendChild(tit); li.appendChild(plc);
+    li.onclick = () => {
+      goTo(parseInt(li.dataset.idx, 10));
+      document.getElementById('sketchbook').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+    plateGrid.appendChild(li);
+  });
+}
+
+function highlightActivePlate() {
+  plateGrid.querySelectorAll('.plate-item').forEach(item => {
+    item.classList.toggle('active', parseInt(item.dataset.idx, 10) === idx);
+  });
+}
+
+renderPlateGrid(PAGES);
+
+searchInput.oninput = (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  if(!q) { renderPlateGrid(PAGES); return; }
+  const filtered = PAGES.filter(p =>
+    p.title.toLowerCase().includes(q) ||
+    p.country.toLowerCase().includes(q) ||
+    p.place.toLowerCase().includes(q) ||
+    String(p.plateNumber) === q ||
+    String(p.plateNumber).padStart(3, '0').includes(q)
+  );
+  renderPlateGrid(filtered);
+};
+
+/* ------------------------------------------------ Parent Message Sync */
+function notifyParent() {
+  try {
+    const p = PAGES[idx];
+    window.parent.postMessage({
+      type: 'SKETCHBOOK_PAGE_CHANGED',
+      pageIndex: idx,
+      plateNumber: p.plateNumber,
+      title: p.title,
+      place: p.place,
+      chapter: p.chapter,
+      country: p.country,
+      coordinates: p.coordinates,
+      description: p.description
+    }, '*');
+  } catch(e){}
+}
+
+window.sketchbook = {
+  goTo: function(targetIdx) {
+    if(typeof targetIdx !== 'number' || targetIdx < 0 || targetIdx >= M) return;
+    if(turn) { idx = turn.to; turn = null; }
+    idx = targetIdx;
+    paint();
+  },
+  step: function(dir) {
+    step(dir);
+  },
+  getIdx: function() { return idx; },
+  PAGES: PAGES
+};
+
+window.addEventListener('message', (e) => {
+  if(!e.data || typeof e.data !== 'object') return;
+  if(e.data.type === 'GO_TO_PLATE') {
+    const targetIdx = PAGES.findIndex(p => p.plateNumber === e.data.plateNumber);
+    if(targetIdx !== -1) window.sketchbook.goTo(targetIdx);
+  } else if(e.data.type === 'GO_TO_PAGE_INDEX') {
+    window.sketchbook.goTo(e.data.pageIndex);
+  } else if(e.data.type === 'SET_CHAPTER') {
+    const targetIdx = PAGES.findIndex(p => p.chapter === e.data.chapterNumber);
+    if(targetIdx !== -1) window.sketchbook.goTo(targetIdx);
+  } else if(e.data.type === 'NEXT_PLATE') {
+    step('next');
+  } else if(e.data.type === 'PREV_PLATE') {
+    step('prev');
+  } else if(e.data.type === 'SET_ZOOM') {
+    setView(view.trx, view.try_, e.data.zoom);
+  } else if(e.data.type === 'TOGGLE_LOUPE') {
+    loupeOn = e.data.on !== undefined ? e.data.on : !loupeOn;
+    loupe.classList.toggle('on', loupeOn);
+  }
+});
+
+/* ------------------------------------------------ Boot */
+(async function boot() {
+  idx = Q.has('shot') ? (parseInt(Q.get('shot'), 10) || 0) % M : (Q.has('plate') ? parseInt(Q.get('plate'), 10) : 0);
+  paint();
+  applyView();
+  syncZoom();
+  restLoupe();
+  document.body.dataset.ready = '1';
+  // Preload immediate adjacent plates
+  const toPreload = [idx, (idx + 1) % M, (idx - 1 + M) % M];
+  toPreload.forEach(i => {
+    const im = new __threeuiStorageImage();
+    im.src = PAGES[i].url;
+  });
+})();
+</script>
+</body>
+</html>

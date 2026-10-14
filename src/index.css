@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --paper: #ece7dc;
+    --parchment: #e5d6bd;
+    --ink: #2b2721;
+    --ink-soft: rgba(43, 39, 33, 0.58);
+    --terracotta: #b8755c;
+    --botanical: #69775a;
+    --ocean: #7f9fa6;
+  }
+
+  body {
+    background-color: #1a1714;
+    color: #2b2721;
+    font-family: 'Newsreader', 'Times New Roman', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.font-display {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.font-body {
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+/* ThreeUI Shader Frame styling */
+.shader-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #181512;
+}
+
+/* Custom delicate scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(43, 39, 33, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(43, 39, 33, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(43, 39, 33, 0.35);
+}

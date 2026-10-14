@@ -1,0 +1,8 @@
+{
+  "name": "Atlas of Elsewhere",
+  "description": "A sketchbook of places, passages, and little discoveries — an interactive world travel journal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
